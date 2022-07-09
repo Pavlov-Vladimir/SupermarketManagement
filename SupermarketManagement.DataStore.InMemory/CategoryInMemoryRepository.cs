@@ -13,8 +13,30 @@ public class CategoryInMemoryRepository : ICategoryRepository
         };
     }
 
+    public async Task AddCategory(Category category)
+    {
+        if (_categories is not null)
+        {
+            if (_categories.Any(c => c.Name.Equals(category.Name, StringComparison.InvariantCultureIgnoreCase)))
+            {
+                return;
+            }
+
+            var maxId = _categories.Max(c => c.Id);
+            category.Id = maxId;
+
+            await Task.Run(() => _categories?.Add(category)); 
+        }
+        else
+        {
+            throw new Exception("Data Store does not exist.");
+        }
+    }
+
     public async Task<IEnumerable<Category>?> GetCategories()
     {
         return await Task.FromResult(_categories);
     }
+
+
 }

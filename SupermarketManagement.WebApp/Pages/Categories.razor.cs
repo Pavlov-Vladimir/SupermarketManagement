@@ -6,9 +6,16 @@ public partial class Categories
 
     [Inject]
     public IViewCategoriesUseCase ViewCategoriesUseCase { get; set; } = null!;
+    [Inject]
+    public NavigationManager NavigationManager { get; set; } = null!;
 
     protected override async Task OnInitializedAsync()
     {
         categories = (await ViewCategoriesUseCase.Execute())?.ToList();
+    }
+
+    private void AddCategory_Click()
+    {
+        NavigationManager.NavigateTo("/AddCategory");
     }
 }
