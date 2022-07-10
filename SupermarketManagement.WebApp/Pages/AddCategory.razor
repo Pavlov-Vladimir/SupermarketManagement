@@ -3,7 +3,7 @@
 @inject IAddCategoryUseCase AddCategoryUseCase
 @inject NavigationManager NavigationManager
 
-<h3 class="mb-5">Add Category</h3>
+<h3 class="mb-3">Add Category</h3>
 
 @if (Category is not null)
 {
@@ -20,8 +20,9 @@
             <InputText id="description" class="form-control" @bind-Value="Category.Description"></InputText>
         </div>
 
-        <button type="submit" class="btn btn-primary me-3">Save</button>
-        <button type="button" class="btn btn-primary" @onclick="Cancel_Click">Cancel</button>
+        <button type="submit" class="btn btn-primary me-2">Save</button>
+        <button type="button" class="btn btn-primary" @onclick="HandleCancellation_Click">Cancel</button>
+
     </EditForm>
 }
 
@@ -40,7 +41,7 @@
         NavigationManager.NavigateTo("/Categories");
     }
 
-    private void Cancel_Click()
+    private void HandleCancellation_Click()
     {
         NavigationManager.NavigateTo("/Categories");
     }

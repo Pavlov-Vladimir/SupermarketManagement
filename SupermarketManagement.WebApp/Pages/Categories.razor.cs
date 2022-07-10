@@ -8,13 +8,21 @@ public partial class Categories
     public IViewCategoriesUseCase ViewCategoriesUseCase { get; set; } = null!;
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
+    public string? ErrorMessage { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        categories = (await ViewCategoriesUseCase.Execute())?.ToList();
+        try
+        {
+            categories = (await ViewCategoriesUseCase.Execute())?.ToList();
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
     }
 
-    private void AddCategory_Click()
+    private void HandleAddingCategory_Click()
     {
         NavigationManager.NavigateTo("/AddCategory");
     }

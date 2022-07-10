@@ -1,0 +1,74 @@
+﻿@page "/EditCategory/{CategoryId:int}"
+
+@inject NavigationManager NavigationManager
+@inject IGetCategoryByIdUseCase GetCategoryByIdUseCase
+@inject IEditCategoryUseCase EditCategoryUseCase
+
+<h3 class="mb-3">Edit Category</h3>
+
+@if (Category is null && ErrorMessage is null)
+{
+    <p>Loading categories...</p>
+}
+else if (ErrorMessage is not null)
+{
+    <h5 class="alert alert-danger">@ErrorMessage</h5>
+}
+else
+{
+    <EditForm Model="@Category" class="form-inline" OnValidSubmit="OnValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group mb-3">
+            <label for="name">Name</label>
+            <InputText id="name" class="form-control" @bind-Value="Category!.Name"></InputText>
+        </div>
+        <div class="form-group mb-3">
+            <label for="description">Description</label>
+            <InputText id="description" class="form-control" @bind-Value="Category!.Description"></InputText>
+        </div>
+
+        <button type="submit" class="btn btn-primary me-2">Save</button>
+        <button type="button" class="btn btn-primary" @onclick="HandleCancellation_Click">Cancel</button>
+
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public int CategoryId { get; set; }
+    public Category? Category { get; set; }
+    public string? ErrorMessage { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        try
+        {
+            Category = await GetCategoryByIdUseCase.Execute(CategoryId);
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+    }
+
+    private async Task OnValidSubmit()
+    {
+        try
+        {
+            await EditCategoryUseCase.Execute(Category!);
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+
+        NavigationManager.NavigateTo("/Categories");
+    }
+
+    private void HandleCancellation_Click()
+    {
+        NavigationManager.NavigateTo("/Categories");
+    }
+}

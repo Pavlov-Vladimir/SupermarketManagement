@@ -9,13 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{B64EA172-8DD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{7ACEE6F5-A96C-4E0B-A46C-92FEBAA81EAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermarketManagement.Entities", "SupermarketManagement.Entities\SupermarketManagement.Entities.csproj", "{6FC86055-4E18-4066-9B96-F26DD4F50362}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupermarketManagement.Entities", "SupermarketManagement.Entities\SupermarketManagement.Entities.csproj", "{6FC86055-4E18-4066-9B96-F26DD4F50362}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermarketManagement.UseCases", "SupermarketManagement.UseCases\SupermarketManagement.UseCases.csproj", "{1F806F8E-21E4-4548-925D-D64103E0CB84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupermarketManagement.UseCases", "SupermarketManagement.UseCases\SupermarketManagement.UseCases.csproj", "{1F806F8E-21E4-4548-925D-D64103E0CB84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermarketManagement.WebApp", "SupermarketManagement.WebApp\SupermarketManagement.WebApp.csproj", "{44AFBDEA-8EC7-4446-80D5-C8E3030B2021}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupermarketManagement.WebApp", "SupermarketManagement.WebApp\SupermarketManagement.WebApp.csproj", "{44AFBDEA-8EC7-4446-80D5-C8E3030B2021}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermarketManagement.DataStore.InMemory", "SupermarketManagement.DataStore.InMemory\SupermarketManagement.DataStore.InMemory.csproj", "{94FFFB0A-6FA5-4CCC-9BF0-21F6BEC6DDD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupermarketManagement.DataStore.InMemory", "SupermarketManagement.DataStore.InMemory\SupermarketManagement.DataStore.InMemory.csproj", "{94FFFB0A-6FA5-4CCC-9BF0-21F6BEC6DDD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
