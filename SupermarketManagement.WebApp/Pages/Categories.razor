@@ -2,17 +2,19 @@
 
 <h3>Manage Categories</h3>
 
-@if (categories is null && ErrorMessage is null)
+@if (_categories is null && ErrorMessage is null)
 {
     <p>Loading categories...</p>
 }
 else if (ErrorMessage is not null)
 {
-    <h5 class="alert alert-danger">@ErrorMessage</h5>
+    <h5 class="alert alert-danger my-4">@ErrorMessage</h5>
 }
 else
 {
-    <table class="table">
+    @if (_categories!.Any())
+    {
+        <table class="table">
         <thead>
             <tr>
                 <th>Name</th>
@@ -21,17 +23,25 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var category in categories!)
+            @foreach (var category in _categories!)
             {
                 <tr>
                     <td>@category.Name</td>
                     <td>@category.Description</td>
-                    <td>
+                    <td class="text-center">
                         <a href="/EditCategory/@category.Id">Edit</a>
+                        <button class="btn btn-link" style="padding:0; vertical-align:auto;"
+                            @onclick="(() => HandleDeleting_Click(category.Id))">Delete
+                        </button>
                     </td>
                 </tr>
             }
         </tbody>
-    </table>
+        </table>
+    }
+    else
+    {
+        <h5 class="my-4">There is no category here.</h5>
+    }
 }
 <button class="btn btn-primary" @onclick="HandleAddingCategory_Click">Add Category</button>

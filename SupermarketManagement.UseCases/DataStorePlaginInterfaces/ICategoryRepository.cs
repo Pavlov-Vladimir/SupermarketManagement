@@ -5,4 +5,5 @@ public interface ICategoryRepository
     Task AddCategory(Category category);
     Task UpdateCategory(Category category);
     Task<Category?> GetCategoryById(int categoryId);
+    Task DeleteCategory(int id);
 }

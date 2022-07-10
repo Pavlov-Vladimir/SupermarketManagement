@@ -114,4 +114,28 @@ public class CategoryInMemoryRepository : ICategoryRepository
             throw;
         }
     }
+
+    public async Task DeleteCategory(int id)
+    {
+        try
+        {
+            if (_categories is not null)
+            {
+                var categoryToDelete = await GetCategoryById(id);
+
+                if (categoryToDelete is not null)
+                {
+                    _categories.Remove(categoryToDelete); 
+                }
+            }
+            else
+            {
+                throw new DataStoreNotFoundException(nameof(CategoryInMemoryRepository));
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
 }
