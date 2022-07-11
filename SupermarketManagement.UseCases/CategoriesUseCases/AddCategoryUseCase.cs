@@ -1,4 +1,4 @@
-﻿namespace SupermarketManagement.UseCases;
+﻿namespace SupermarketManagement.UseCases.CategoriesUseCases;
 public class AddCategoryUseCase : IAddCategoryUseCase
 {
     private readonly ICategoryRepository _categoryRepository;
