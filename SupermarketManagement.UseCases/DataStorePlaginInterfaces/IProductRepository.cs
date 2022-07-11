@@ -2,4 +2,5 @@
 public interface IProductRepository
 {
     Task<IEnumerable<Product>?> GetProducts();
+    Task AddProduct(Product product);
 }

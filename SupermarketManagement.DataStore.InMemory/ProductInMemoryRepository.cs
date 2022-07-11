@@ -16,6 +16,38 @@ public class ProductInMemoryRepository : IProductRepository
         };
     }
 
+    public async Task AddProduct(Product product)
+    {
+        try
+        {
+            if (_products is not null)
+            {
+                if (IsExists(product))
+                {
+                    return;
+                }
+
+                int maxId = _products.Max(p => p.Id);
+                product.Id = maxId + 1;
+
+                await Task.Run(() => _products.Add(product));
+            }
+            else
+            {
+                throw new DataStoreNotFoundException(nameof(ProductInMemoryRepository));
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    private bool IsExists(Product product)
+    {
+        return _products!.Any(p => p.Name.Equals(product.Name, StringComparison.InvariantCultureIgnoreCase));
+    }
+
     public async Task<IEnumerable<Product>?> GetProducts()
     {
         try
