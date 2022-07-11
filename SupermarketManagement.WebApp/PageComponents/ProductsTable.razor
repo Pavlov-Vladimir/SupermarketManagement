@@ -1,0 +1,47 @@
+﻿<table class="table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Category</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Products)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@GetCategoryName(product.CategoryId).Result</td>
+                <td>@product.Quantity</td>
+                <td>$ @product.Price</td>
+                <td class="text-center">
+                    <a href="">Edit</a>
+                    <button class="btn btn-link py-0 align-baseline"
+                        @onclick="(() => HandleDeleting_Click(product.Id))">
+                        Delete
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+
+    [Parameter]
+    public List<Product> Products { get; set; } = null!;
+    [Inject]
+    public IGetCategoryByIdUseCase GetCategoryByIdUseCase { get; set; } = null!;
+
+    private async Task<string?> GetCategoryName(int categoryId)
+    {
+        return (await GetCategoryByIdUseCase.Execute(categoryId))?.Name;
+    }
+
+    private async Task HandleDeleting_Click(int productId)
+    {
+
+    }
+}

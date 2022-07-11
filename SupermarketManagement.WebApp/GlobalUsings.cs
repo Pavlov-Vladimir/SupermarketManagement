@@ -11,3 +11,5 @@ global using SupermarketManagement.DataStore.InMemory;
 global using SupermarketManagement.WebApp.Data;
 global using SupermarketManagement.UseCases.UseCasesInterfaces;
 global using SupermarketManagement.UseCases.CategoriesUseCases;
+global using SupermarketManagement.UseCases.ProductsUseCasesInterfaces;
+global using SupermarketManagement.UseCases;

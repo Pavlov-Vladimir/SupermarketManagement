@@ -1,6 +1,4 @@
-﻿using SupermarketManagement.Entities;
-
-namespace SupermarketManagement.DataStore.InMemory;
+﻿namespace SupermarketManagement.DataStore.InMemory;
 public class CategoryInMemoryRepository : ICategoryRepository
 {
     private List<Category>? _categories;

@@ -15,33 +15,34 @@ else
     @if (_categories!.Any())
     {
         <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var category in _categories!)
-            {
+            <thead>
                 <tr>
-                    <td>@category.Name</td>
-                    <td>@category.Description</td>
-                    <td class="text-center">
-                        <a href="/EditCategory/@category.Id">Edit</a>
-                        <button class="btn btn-link py-0 align-baseline"
-                            @onclick="(() => HandleDeleting_Click(category.Id))">Delete
-                        </button>
-                    </td>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
+            </thead>
+            <tbody>
+                @foreach (var category in _categories!)
+                {
+                    <tr>
+                        <td>@category.Name</td>
+                        <td>@category.Description</td>
+                        <td class="text-center">
+                            <a href="/EditCategory/@category.Id">Edit</a>
+                            <button class="btn btn-link py-0 align-baseline"
+                        @onclick="(() => HandleDeleting_Click(category.Id))">
+                                Delete
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
     }
     else
     {
         <h5 class="my-4">There is no category here.</h5>
     }
+    <button class="btn btn-primary" @onclick="HandleAddingCategory_Click">Add Category</button>
 }
-<button class="btn btn-primary" @onclick="HandleAddingCategory_Click">Add Category</button>

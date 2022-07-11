@@ -34,15 +34,8 @@ public partial class Categories
 
     protected async Task HandleDeleting_Click(int categoryId)
     {
-        var category = await GetCategoryByIdUseCase.Execute(categoryId);
-
-        await RemoveCategory(categoryId);
-    }
-
-    private async Task RemoveCategory(int id)
-    {
-        await DeleteCategoryUseCase.Execute(id);
-        var category = _categories!.First(c => c.Id == id);
+        await DeleteCategoryUseCase.Execute(categoryId);
+        var category = _categories!.First(c => c.Id == categoryId);
         _categories!.Remove(category);
     }
 }
