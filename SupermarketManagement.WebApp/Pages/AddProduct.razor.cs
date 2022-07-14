@@ -1,7 +1,4 @@
-﻿using SupermarketManagement.Entities;
-using System.ComponentModel.DataAnnotations;
-
-namespace SupermarketManagement.WebApp.Pages;
+﻿namespace SupermarketManagement.WebApp.Pages;
 
 public partial class AddProduct
 {

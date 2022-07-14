@@ -7,3 +7,4 @@ global using System.ComponentModel.DataAnnotations;
 global using SupermarketManagement.Entities;
 global using SupermarketManagement.UseCases.DataStorePlaginInterfaces;
 global using SupermarketManagement.UseCases.UseCasesInterfaces;
+global using SupermarketManagement.UseCases.ProductsUseCasesInterfaces;

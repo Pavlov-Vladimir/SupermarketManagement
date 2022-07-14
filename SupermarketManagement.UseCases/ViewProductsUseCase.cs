@@ -1,6 +1,4 @@
-﻿using SupermarketManagement.UseCases.ProductsUseCasesInterfaces;
-
-namespace SupermarketManagement.UseCases;
+﻿namespace SupermarketManagement.UseCases;
 public class ViewProductsUseCase : IViewProductsUseCase
 {
     private readonly IProductRepository _productsRepository;

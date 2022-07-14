@@ -1,4 +1,6 @@
-﻿namespace SupermarketManagement.DataStore.InMemory;
+﻿using SupermarketManagement.Entities;
+
+namespace SupermarketManagement.DataStore.InMemory;
 public class ProductInMemoryRepository : IProductRepository
 {
     private List<Product>? _products;
@@ -59,6 +61,55 @@ public class ProductInMemoryRepository : IProductRepository
         try
         {
             return await Task.FromResult(_products);
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    public Task UpdateProduct(Product product)
+    {
+        try
+        {
+            if (_products is not null)
+            {
+                if (_products.Any() && product is not null)
+                {
+                    var productToUpdate = _products.SingleOrDefault(p => p.Id == product.Id);
+                    if (productToUpdate is null)
+                    {
+                        throw new EntityNotFoundException(product.Name);
+                    }
+
+                    productToUpdate = product;
+                }
+
+                return Task.CompletedTask;
+            }
+            else
+            {
+                throw new DataStoreNotFoundException(nameof(ProductInMemoryRepository));
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    public async Task<Product?> GetProduct(int productId)
+    {
+        try
+        {
+            if (_products is not null)
+            {
+                return await Task<Product?>.FromResult(_products.FirstOrDefault(p => p.Id == productId));
+            }
+            else
+            {
+                throw new DataStoreNotFoundException(nameof(ProductInMemoryRepository));
+            }
         }
         catch (Exception)
         {
