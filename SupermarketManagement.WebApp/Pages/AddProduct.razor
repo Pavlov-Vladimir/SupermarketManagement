@@ -22,13 +22,14 @@ else
             <InputText id="name" class="form-control" @bind-Value="Product!.Name"></InputText>
         </div>
 
-        <div class="form-group mb-3">
-            <label for="category">Category</label>
-            <InputSelect id="category" class="form-select" @bind-Value="Product.CategoryId">
-                @foreach (var category in Categories!)
-                {
-                <option value="@category.Id">@category.Name</option>
-                }
+            <div class="form-group mb-3">
+                <label for="category">Category</label>
+                <InputSelect id="category" class="form-select" @bind-Value="Product.CategoryId">
+                    <option value="@STARTED_CATEGORY_ID" selected>Select Category...</option>
+                    @foreach (var category in Categories!)
+                    {
+                    <option value="@category.Id">@category.Name</option>
+                    }
             </InputSelect>
         </div>
 
@@ -45,52 +46,4 @@ else
         <button type="submit" class="btn btn-primary mx-3">Save</button>
         <button type="button" class="btn btn-primary" @onclick="HandleCancelation_Click">Cancel</button>
     </EditForm>
-}
-
-
-@code {
-
-    public Product? Product { get; set; }
-    public IEnumerable<Category>? Categories { get; set; }
-    public string? ErrorMessage { get; set; }
-
-    [Inject]
-    public IAddProductUseCase AddProductUseCase { get; set; } = null!;
-    [Inject]
-    public IViewCategoriesUseCase ViewCategoriesUseCase { get; set; } = null!;
-    [Inject]
-    public NavigationManager NavigationManager { get; set; } = null!;
-
-    protected override async Task OnInitializedAsync()
-    {
-        try
-        {
-            Product = new Product();
-            Categories = await ViewCategoriesUseCase.Execute();
-        }
-        catch (Exception ex)
-        {
-            ErrorMessage = ex.Message;
-        }
-
-    }
-
-    private async void HandleValidSubmit()
-    {
-        try
-        {
-            await AddProductUseCase.Execute(Product!);
-            NavigationManager.NavigateTo("/Products");
-        }
-        catch (Exception ex)
-        {
-            ErrorMessage = ex.Message;
-        }
-        
-    }
-
-    private void HandleCancelation_Click()
-    {
-        NavigationManager.NavigateTo("/Products");
-    }
 }

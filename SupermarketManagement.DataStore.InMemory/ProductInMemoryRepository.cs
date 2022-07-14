@@ -22,13 +22,19 @@ public class ProductInMemoryRepository : IProductRepository
         {
             if (_products is not null)
             {
-                if (IsExists(product))
+                if (!_products.Any())
                 {
-                    return;
+                    product.Id = 1;
                 }
-
-                int maxId = _products.Max(p => p.Id);
-                product.Id = maxId + 1;
+                else
+                {
+                    if (IsExists(product))
+                    {
+                        return;
+                    }
+                    int maxId = _products.Max(p => p.Id);
+                    product.Id = maxId + 1;
+                }
 
                 await Task.Run(() => _products.Add(product));
             }
