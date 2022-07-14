@@ -116,4 +116,29 @@ public class ProductInMemoryRepository : IProductRepository
             throw;
         }
     }
+
+    public async Task DeleteProduct(int productId)
+    {
+        try
+        {
+            if (_products is not null)
+            {
+                var productToDelete = await Task<Product?>.FromResult(_products.FirstOrDefault(p => p.Id == productId));
+                if (productToDelete is null)
+                {
+                    throw new EntityNotFoundException($"Id = {productId}");
+                }
+
+                await Task.Run(() => _products.Remove(productToDelete));
+            }
+            else
+            {
+                throw new DataStoreNotFoundException(nameof(ProductInMemoryRepository));
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
 }

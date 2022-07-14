@@ -14,7 +14,7 @@ else
 {
     @if (ProductsList!.Any())
     {
-        <ProductsTable Products="@ProductsList" />
+        <ProductsTable Products="@ProductsList" HandleDeleting_Click="HandleDeleting" />
     }
     else
     {

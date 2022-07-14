@@ -1,0 +1,53 @@
+﻿<EditForm Model="@Product" class="form-inline" OnValidSubmit="(() => HandleValidSubmit.InvokeAsync(Product))">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group mb-3">
+        <label for="name">Name</label>
+        <InputText id="name" class="form-control" @bind-Value="Product!.Name"></InputText>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="category">Category</label>
+        <InputSelect id="category" class="form-select" @bind-Value="Product.CategoryId">
+            @if (Product.CategoryId == STARTED_CATEGORY_ID)
+            {
+                <option value="@STARTED_CATEGORY_ID" selected>Select Category...</option>
+            }
+            @foreach (var category in Categories!)
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
+        </InputSelect>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="quantity">Quantity</label>
+        <InputNumber id="quantity" class="form-control" @bind-Value="Product.Quantity"></InputNumber>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="rice">Price</label>
+        <InputNumber id="rice" class="form-control" @bind-Value="Product.Price"></InputNumber>
+    </div>
+
+    <button type="submit" class="btn btn-primary mx-3">Save</button>
+    <button type="button" class="btn btn-primary" @onclick="HandleCancelation_Click">Cancel</button>
+</EditForm>
+
+@code {
+    private const int STARTED_CATEGORY_ID = -1;
+    [Parameter]
+    public Product Product { get; set; } = null!;
+    [Parameter]
+    public IEnumerable<Category> Categories { get; set; } = null!;
+    [Parameter]
+    public EventCallback<Product> HandleValidSubmit { get; set; }
+    [Inject]
+    public NavigationManager NavigationManager { get; set; } = null!;
+
+    private void HandleCancelation_Click()
+    {
+        NavigationManager.NavigateTo("/Products");
+    }
+}

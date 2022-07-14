@@ -17,9 +17,9 @@
                 <td>@product.Quantity</td>
                 <td>$ @product.Price</td>
                 <td class="text-center">
-                    <a href="">Edit</a>
+                    <a href="/EditProduct/@product.Id">Edit</a>
                     <button class="btn btn-link py-0 align-baseline"
-                        @onclick="(() => HandleDeleting_Click(product.Id))">
+                        @onclick="(() => HandleDeleting_Click.InvokeAsync(product.Id))">
                         Delete
                     </button>
                 </td>
@@ -29,19 +29,15 @@
 </table>
 
 @code {
-
     [Parameter]
     public List<Product> Products { get; set; } = null!;
+    [Parameter]
+    public EventCallback<int> HandleDeleting_Click { get; set; }
     [Inject]
     public IGetCategoryByIdUseCase GetCategoryByIdUseCase { get; set; } = null!;
 
     private async Task<string?> GetCategoryName(int categoryId)
     {
         return (await GetCategoryByIdUseCase.Execute(categoryId))?.Name;
-    }
-
-    private async Task HandleDeleting_Click(int productId)
-    {
-
     }
 }

@@ -1,15 +1,34 @@
-﻿namespace SupermarketManagement.WebApp.Pages;
+﻿@page "/EditProduct/{ProductId:int}"
 
-public partial class AddProduct
+<h3>Edit Product "@Product?.Name"</h3>
+
+@if (Product is null && Categories is null && ErrorMessage is null)
 {
-    private const int STARTED_CATEGORY_ID = -1;
+    <p>Loading data...</p>
+}
+else if (ErrorMessage is not null)
+{
+    <h5 class="alert alert-danger my-4">@ErrorMessage</h5>
+}
+else
+{
+    <EditProductDetails Product="Product" Categories="Categories" HandleValidSubmit="HandleValidSubmit" />
+}
+
+@code {
+    [Parameter]
+    public int ProductId { get; set; }
+
     public Product? Product { get; set; }
     public IEnumerable<Category>? Categories { get; set; }
     public string? ErrorMessage { get; set; }
+
     [Inject]
-    public IAddProductUseCase AddProductUseCase { get; set; } = null!;
+    public IGetProductByIdUseCase GetProductByIdUseCase { get; set; } = null!;
     [Inject]
     public IViewCategoriesUseCase ViewCategoriesUseCase { get; set; } = null!;
+    [Inject]
+    public IEditProductUseCase EditProductUseCase { get; set; } = null!;
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
 
@@ -17,14 +36,13 @@ public partial class AddProduct
     {
         try
         {
-            Product = new Product();
-            Product.CategoryId = STARTED_CATEGORY_ID;
+            Product = await GetProductByIdUseCase.Execute(ProductId);
             Categories = await ViewCategoriesUseCase.Execute();
         }
         catch (Exception ex)
         {
             ErrorMessage = ex.Message;
-        }
+        }        
     }
 
     protected async Task HandleValidSubmit(Product product)
@@ -32,12 +50,12 @@ public partial class AddProduct
         try
         {
             product.Price = Math.Round(product.Price, 2);
-            await AddProductUseCase.Execute(product);
+            await EditProductUseCase.Execute(product);
             NavigationManager.NavigateTo("/Products");
         }
         catch (Exception ex)
         {
             ErrorMessage = ex.Message;
-        }
+        }        
     }
 }

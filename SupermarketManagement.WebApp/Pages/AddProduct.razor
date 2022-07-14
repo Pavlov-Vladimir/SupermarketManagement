@@ -2,10 +2,9 @@
 
 <h3>Add Product</h3>
 
-
 @if (Product is null && Categories is null && ErrorMessage is null)
 {
-    <p>Loading categories...</p>
+    <p>Loading data...</p>
 }
 else if (ErrorMessage is not null)
 {
@@ -13,37 +12,5 @@ else if (ErrorMessage is not null)
 }
 else
 {
-    <EditForm Model="@Product" class="form-inline" OnValidSubmit="HandleValidSubmit">
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-
-        <div class="form-group mb-3">
-            <label for="name">Name</label>
-            <InputText id="name" class="form-control" @bind-Value="Product!.Name"></InputText>
-        </div>
-
-            <div class="form-group mb-3">
-                <label for="category">Category</label>
-                <InputSelect id="category" class="form-select" @bind-Value="Product.CategoryId">
-                    <option value="@STARTED_CATEGORY_ID" selected>Select Category...</option>
-                    @foreach (var category in Categories!)
-                    {
-                    <option value="@category.Id">@category.Name</option>
-                    }
-            </InputSelect>
-        </div>
-
-        <div class="form-group mb-3">
-            <label for="quantity">Quantity</label>
-            <InputNumber id="quantity" class="form-control" @bind-Value="Product.Quantity"></InputNumber>
-        </div>
-
-        <div class="form-group mb-3">
-            <label for="rice">Price</label>
-            <InputNumber id="rice" class="form-control" @bind-Value="Product.Price"></InputNumber>
-        </div>
-
-        <button type="submit" class="btn btn-primary mx-3">Save</button>
-        <button type="button" class="btn btn-primary" @onclick="HandleCancelation_Click">Cancel</button>
-    </EditForm>
+    <EditProductDetails Product="Product" Categories="Categories" HandleValidSubmit="HandleValidSubmit" />
 }
