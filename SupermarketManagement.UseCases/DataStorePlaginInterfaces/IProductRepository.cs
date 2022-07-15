@@ -6,4 +6,5 @@ public interface IProductRepository
     Task UpdateProduct(Product product);
     Task<Product?> GetProduct(int productId);
     Task DeleteProduct(int productId);
+    Task<IEnumerable<Product>?> GetProductsByCategoryId(int categoryId);
 }

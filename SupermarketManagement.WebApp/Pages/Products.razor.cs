@@ -6,7 +6,7 @@ public partial class Products
     public string? ErrorMessage { get; set; }
 
     [Inject]
-    public IViewProductsUseCase ViewProductsUseCase { get; set; } = null!;    
+    public IViewProductsUseCase ViewProductsUseCase { get; set; } = null!;
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
     [Inject]
@@ -36,7 +36,15 @@ public partial class Products
 
     private async Task HandleDeleting(int productId)
     {
-        await DeleteProductUseCase.Execute(productId);
-        await GetProductsList();
+        try
+        {
+            await DeleteProductUseCase.Execute(productId);
+            await GetProductsList();
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+
     }
 }

@@ -141,4 +141,23 @@ public class ProductInMemoryRepository : IProductRepository
             throw;
         }
     }
+
+    public async Task<IEnumerable<Product>?> GetProductsByCategoryId(int categoryId)
+    {
+        try
+        {
+            if (_products is not null)
+            {
+                return await Task<IEnumerable<Product>?>.FromResult(_products.Where(p => p.CategoryId == categoryId));                
+            }
+            else
+            {
+                throw new DataStoreNotFoundException(nameof(ProductInMemoryRepository));
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
 }

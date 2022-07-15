@@ -1,4 +1,4 @@
-﻿namespace SupermarketManagement.UseCases;
+﻿namespace SupermarketManagement.UseCases.ProductsUseCases;
 public class DeleteProductUseCase : IDeleteProductUseCase
 {
     private readonly IProductRepository _productRepository;

@@ -1,5 +1,3 @@
-using SupermarketManagement.UseCases.CategoriesUseCases;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -23,6 +21,7 @@ builder.Services.AddTransient<IAddProductUseCase, AddProductUseCase>();
 builder.Services.AddTransient<IEditProductUseCase, EditProductUseCase>();
 builder.Services.AddTransient<IGetProductByIdUseCase, GetProductByIdUseCase>();
 builder.Services.AddTransient<IDeleteProductUseCase, DeleteProductUseCase>();
+builder.Services.AddTransient<IViewProductsByCategoryIdUseCase, ViewProductsByCategoryIdUseCase>();
 
 var app = builder.Build();
 

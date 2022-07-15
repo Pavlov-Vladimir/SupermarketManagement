@@ -1,6 +1,4 @@
-﻿using SupermarketManagement.UseCases.ProductsUseCasesInterfaces;
-
-namespace SupermarketManagement.UseCases;
+﻿namespace SupermarketManagement.UseCases.ProductsUseCases;
 public class AddProductUseCase : IAddProductUseCase
 {
     private readonly IProductRepository _productRepository;

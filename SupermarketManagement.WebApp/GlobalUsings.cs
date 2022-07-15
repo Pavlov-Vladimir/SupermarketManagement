@@ -13,3 +13,5 @@ global using SupermarketManagement.UseCases.UseCasesInterfaces;
 global using SupermarketManagement.UseCases.CategoriesUseCases;
 global using SupermarketManagement.UseCases.ProductsUseCasesInterfaces;
 global using SupermarketManagement.UseCases;
+global using SupermarketManagement.UseCases.ProductsUseCases;
+

@@ -1,4 +1,4 @@
-﻿namespace SupermarketManagement.UseCases;
+﻿namespace SupermarketManagement.UseCases.ProductsUseCases;
 public class ViewProductsUseCase : IViewProductsUseCase
 {
     private readonly IProductRepository _productsRepository;
