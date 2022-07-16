@@ -50,6 +50,11 @@ public partial class Categories
             var category = _categories!.First(c => c.Id == categoryId);
             _categories!.Remove(category);
         }
-
+    }
+    
+    private void HandleResetError()
+    {
+        ErrorMessage = null;
+        StateHasChanged();
     }
 }

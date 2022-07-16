@@ -1,9 +1,11 @@
-﻿namespace SupermarketManagement.WebApp.PageComponents.Controls;
+﻿using SupermarketManagement.Entities;
+
+namespace SupermarketManagement.WebApp.PageComponents.Controls;
 
 public partial class SelectProductForSelling
 {
     [Parameter]
-    public EventCallback<Product> ProductSelected { get; set; }
+    public EventCallback<Product?> ProductSelected { get; set; }
     public IEnumerable<Product>? Products { get; set; }
     public IEnumerable<Category>? Categories { get; set; }
     private int _categoryId;
@@ -20,6 +22,7 @@ public partial class SelectProductForSelling
         }
     }
     private const int STARTED_CATEGORY_ID = -1;
+    private int selectedProductId;
     [Inject]
     public IViewProductsByCategoryIdUseCase ViewProductsByCategoryId { get; set; } = null!;
     [Inject]
@@ -34,10 +37,12 @@ public partial class SelectProductForSelling
     private async Task GetProductsList(int categoryId)
     {
         Products = await ViewProductsByCategoryId.Execute(categoryId);
+        await ProductSelected.InvokeAsync(null);
     }
 
     private void SelectProduct_Click(Product product)
     {
-        ProductSelected.InvokeAsync(product);
+        selectedProductId = product.Id;
+        ProductSelected.InvokeAsync(product);        
     }
 }

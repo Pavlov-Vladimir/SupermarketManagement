@@ -40,4 +40,10 @@ public partial class AddProduct
             ErrorMessage = ex.Message;
         }
     }
+
+    private void HandleResetError()
+    {
+        ErrorMessage = null;
+        StateHasChanged();
+    }
 }

@@ -12,6 +12,7 @@ public partial class SellProduct
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
+
         if (SelectedProduct is not null)
         {
             ProductToSell = new Product
@@ -22,6 +23,10 @@ public partial class SellProduct
                 Price = SelectedProduct.Price,
                 Quantity = 0
             };
+        }
+        else
+        {
+            ProductToSell = null;
         }
     }
 

@@ -8,7 +8,7 @@
 }
 else if (ErrorMessage is not null)
 {
-    <h5 class="alert alert-danger my-4">@ErrorMessage</h5>
+    <ErrorDisplay ErrorMessage="@ErrorMessage" ResetError="HandleResetError" />
 }
 else
 {

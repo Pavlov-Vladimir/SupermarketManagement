@@ -1,0 +1,19 @@
+﻿<h5 class="alert alert-danger my-4">@ErrorMessage</h5>
+
+<button class="btn btn-primary mt-3" @onclick="ResetError_Click">Back</button>
+
+@code {
+    [Parameter]
+    public string? ErrorMessage { get; set; }
+    [Parameter]
+    public EventCallback ResetError { get; set; }
+
+    [Inject]
+    public NavigationManager NavigationManager { get; set; } = null!;
+
+    private void ResetError_Click()
+    {
+        ResetError.InvokeAsync();
+    }
+
+}

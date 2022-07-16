@@ -45,6 +45,11 @@ public partial class Products
         {
             ErrorMessage = ex.Message;
         }
+    }
 
+    private void HandleResetError()
+    {
+        ErrorMessage = null;
+        StateHasChanged();
     }
 }

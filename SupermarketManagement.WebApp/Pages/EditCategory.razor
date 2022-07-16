@@ -12,7 +12,7 @@
 }
 else if (ErrorMessage is not null)
 {
-    <h5 class="alert alert-danger">@ErrorMessage</h5>
+    <ErrorDisplay ErrorMessage="@ErrorMessage" ResetError="HandleResetError" />
 }
 else
 {
@@ -70,5 +70,11 @@ else
     private void HandleCancellation_Click()
     {
         NavigationManager.NavigateTo("/Categories");
+    }
+
+    private void HandleResetError()
+    {
+        ErrorMessage = null;
+        StateHasChanged();
     }
 }
