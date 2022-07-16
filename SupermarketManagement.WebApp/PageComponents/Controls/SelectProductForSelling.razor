@@ -13,19 +13,19 @@
 </div>
 
 @if (Products is not null)
-{
-    <h5>Products:</h5>
-    <table class="table">
+{    
+    <table class="table table-hover caption-top mb-5">
+        <caption class="mb-0">List of products:</caption>
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Qty</th>
+                <th>Qty Left</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Products)
             {
-                <tr>
+                <tr style="cursor:pointer" @onclick="(() => SelectProduct_Click(item))">
                     <td>@item.Name</td>
                     <td>@item.Quantity</td>
                 </tr>
@@ -34,38 +34,5 @@
     </table>
 }
 
-@code {
-    public Product? ProductToSell { get; set; } 
-    public Category? Category { get; set; }
-    public IEnumerable<Product>? Products { get; set; }
-    public IEnumerable<Category>? Categories { get; set; }
-    private int _categoryId;
-    public int CategoryId
-    {
-        get => _categoryId;
-        set
-        {
-            _categoryId = value;
-            if (_categoryId > 0)
-            {
-                GetProductsList(_categoryId);
-            }            
-        }
-    }
-    private const int STARTED_CATEGORY_ID = -1;
-    [Inject]
-    public IViewProductsByCategoryIdUseCase ViewProductsByCategoryId { get; set; } = null!;
-    [Inject]
-    public IViewCategoriesUseCase ViewCategoriesUseCase { get; set; } = null!;
 
-    protected override async Task OnInitializedAsync()
-    {
-        CategoryId = STARTED_CATEGORY_ID;
-        Categories = await ViewCategoriesUseCase.Execute();
-    }
 
-    private async Task GetProductsList(int categoryId)
-    {
-        Products = await ViewProductsByCategoryId.Execute(categoryId);
-    }
-}

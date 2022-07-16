@@ -11,6 +11,8 @@ public partial class Categories
     [Inject]
     public IDeleteCategoryUseCase DeleteCategoryUseCase { get; set; } = null!;
     [Inject]
+    public IViewProductsByCategoryIdUseCase ViewProductsByCategoryIdUseCase { get; set; } = null!;
+    [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
 
     public string? ErrorMessage { get; set; }
@@ -24,6 +26,7 @@ public partial class Categories
         catch (Exception ex)
         {
             ErrorMessage = ex.Message;
+            StateHasChanged();
         }
     }
 
@@ -34,8 +37,19 @@ public partial class Categories
 
     protected async Task HandleDeleting_Click(int categoryId)
     {
-        await DeleteCategoryUseCase.Execute(categoryId);
-        var category = _categories!.First(c => c.Id == categoryId);
-        _categories!.Remove(category);
+        var productsByCategoryId = await ViewProductsByCategoryIdUseCase.Execute(categoryId);
+
+        if (productsByCategoryId is not null)
+        {
+            ErrorMessage = "The category cannot be deleted because it contains products.";
+            StateHasChanged();
+        }
+        else
+        {
+            await DeleteCategoryUseCase.Execute(categoryId);
+            var category = _categories!.First(c => c.Id == categoryId);
+            _categories!.Remove(category);
+        }
+
     }
 }

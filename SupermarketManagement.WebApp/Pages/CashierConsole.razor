@@ -2,8 +2,31 @@
 
 <h3>Cashier's Console</h3>
 
-<SelectProductForSelling />
+<div class="row">
+    <div class="col-6">
+        <div class="form-control border-0">
+            <SelectProductForSelling ProductSelected="HandleSelectProduct" />
+
+            <SellProduct SelectedProduct="SelectedProduct" SoldProduct="HandleSoldProduct" />
+        </div>
+    </div>
+</div>
 
 @code {
+    public Product? SelectedProduct { get; set; }
+    public Product? SoldProduct { get; set; }
+    [Inject]
+    public IEditProductUseCase EditProductUseCase { get; set; } = null!;
 
+    private void HandleSelectProduct(Product product)
+    {
+        SelectedProduct = product;
+    }
+
+    private async Task HandleSoldProduct(Product product)
+    {
+        SoldProduct = product;
+        await EditProductUseCase.Execute(SoldProduct);
+        StateHasChanged();
+    }
 }

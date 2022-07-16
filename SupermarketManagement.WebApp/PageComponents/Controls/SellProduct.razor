@@ -1,0 +1,32 @@
+﻿@if (ProductToSell is not null)
+{
+    <EditForm Model="@ProductToSell" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+
+        <div class="form-group mb-3">
+            <label for="name">Name</label>
+            <input id="name" type="text" class="form-control" readonly value="@ProductToSell.Name" />
+        </div>
+        <div class="form-group mb-3">
+            <label for="price">Price</label>
+            <input id="price" type="text" class="form-control" readonly value="$@ProductToSell.Price" />
+        </div>
+        <div class="form-group mb-3">
+            <label for="qty">Quantity to sell</label>
+            <InputNumber id="qty" class="form-control" @bind-Value="ProductToSell.Quantity"></InputNumber>
+        </div>
+
+        @if (string.IsNullOrWhiteSpace(ErrorMessage) == false)
+        {
+            <div class="alert alert-danger">@ErrorMessage</div>
+        }
+        <ValidationSummary />
+
+        <div class="my-4">
+            <button class="btn btn-primary" type="submit" @onclick="HandleSelling_Click">Sell</button>
+        </div>
+
+    </EditForm>
+
+
+}
