@@ -1,6 +1,4 @@
-﻿using SupermarketManagement.Entities;
-
-namespace SupermarketManagement.DataStore.InMemory;
+﻿namespace SupermarketManagement.DataStore.InMemory;
 public class ProductInMemoryRepository : IProductRepository
 {
     private readonly List<Product>? _products;

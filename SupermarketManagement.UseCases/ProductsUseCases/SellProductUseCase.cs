@@ -1,4 +1,4 @@
-﻿namespace SupermarketManagement.UseCases;
+﻿namespace SupermarketManagement.UseCases.ProductsUseCases;
 public class SellProductUseCase : ISellProductUseCase
 {
     private readonly IProductRepository _productRepository;
@@ -12,9 +12,7 @@ public class SellProductUseCase : ISellProductUseCase
     {
         var product = await _productRepository.GetProduct(productId);
         if (product is null)
-        {
             return;
-        }
         product.Quantity -= qtyToSell;
         await _productRepository.UpdateProduct(product);
     }

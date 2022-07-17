@@ -1,4 +1,4 @@
-﻿namespace SupermarketManagement.UseCases;
+﻿namespace SupermarketManagement.UseCases.ProductsUseCasesInterfaces;
 
 public interface IViewProductsByCategoryIdUseCase
 {
