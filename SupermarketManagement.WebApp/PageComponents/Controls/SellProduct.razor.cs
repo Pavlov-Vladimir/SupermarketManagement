@@ -5,9 +5,11 @@ public partial class SellProduct
     [Parameter]
     public Product? SelectedProduct { get; set; }
     [Parameter]
-    public EventCallback<Product> SoldProduct { get; set; }
+    public EventCallback<Product> OnSoldProduct { get; set; }
     public Product? ProductToSell { get; set; }
     public string? ErrorMessage { get; set; }
+    [Inject]
+    public ISellProductUseCase SellProductUseCase { get; set; } = null!;
 
     protected override void OnParametersSet()
     {
@@ -30,22 +32,23 @@ public partial class SellProduct
         }
     }
 
-    private void HandleValidSubmit()
+    private async Task HandleValidSubmit()
     {
-        SoldProduct.InvokeAsync(ProductToSell);
-    }
-
-    private void HandleSelling_Click()
-    {
-        if (ProductToSell!.Quantity > SelectedProduct!.Quantity)
+        if (ProductToSell!.Quantity <= 0)
         {
-            ErrorMessage = $"Quantity of {SelectedProduct.Name} is not enough. Change the number.";
+            ErrorMessage = $"The quantity to sell must be greater than zero. Change the number.";
+            StateHasChanged();
+        }
+        else if (ProductToSell!.Quantity > SelectedProduct!.Quantity)
+        {
+            ErrorMessage = $"The quantity of {SelectedProduct.Name} is not enough. Change the number.";
             StateHasChanged();
         }
         else
         {
+            await SellProductUseCase.Execute(ProductToSell.Id, ProductToSell.Quantity);
+            await OnSoldProduct.InvokeAsync(ProductToSell);
             ErrorMessage = string.Empty;
-            SelectedProduct!.Quantity -= ProductToSell!.Quantity;
             ProductToSell.Quantity = 0;
             StateHasChanged();
         }

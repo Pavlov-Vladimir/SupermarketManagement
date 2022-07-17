@@ -3,7 +3,7 @@
 namespace SupermarketManagement.DataStore.InMemory;
 public class ProductInMemoryRepository : IProductRepository
 {
-    private List<Product>? _products;
+    private readonly List<Product>? _products;
 
     public ProductInMemoryRepository()
     {

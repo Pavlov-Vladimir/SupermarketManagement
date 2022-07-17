@@ -3,11 +3,11 @@
 <h3>Cashier's Console</h3>
 
 <div class="row">
-    <div class="col-6">
+    <div class="col-4">
         <div class="form-control border-0">
-            <SelectProductForSelling ProductSelected="HandleSelectProduct" />
+            <SelectProductForSelling OnSelectProduct="HandleSelectProduct" />
 
-            <SellProduct SelectedProduct="SelectedProduct" SoldProduct="HandleSoldProduct" />
+            <SellProduct SelectedProduct="SelectedProduct" OnSoldProduct="HandleSoldProduct" />
         </div>
     </div>
 </div>
@@ -15,18 +15,14 @@
 @code {
     public Product? SelectedProduct { get; set; }
     public Product? SoldProduct { get; set; }
-    [Inject]
-    public IEditProductUseCase EditProductUseCase { get; set; } = null!;
 
     private void HandleSelectProduct(Product product)
     {
         SelectedProduct = product;
     }
 
-    private async Task HandleSoldProduct(Product product)
+    private void HandleSoldProduct(Product product)
     {
         SoldProduct = product;
-        await EditProductUseCase.Execute(SoldProduct);
-        StateHasChanged();
     }
 }

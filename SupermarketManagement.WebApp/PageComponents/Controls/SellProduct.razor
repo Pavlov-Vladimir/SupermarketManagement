@@ -2,6 +2,12 @@
 {
     <EditForm Model="@ProductToSell" OnValidSubmit="HandleValidSubmit">
         <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        @if (string.IsNullOrWhiteSpace(ErrorMessage) == false)
+        {
+            <div class="alert alert-danger">@ErrorMessage</div>
+        }
 
         <div class="form-group mb-3">
             <label for="name">Name</label>
@@ -16,14 +22,8 @@
             <InputNumber id="qty" class="form-control" @bind-Value="ProductToSell.Quantity"></InputNumber>
         </div>
 
-        @if (string.IsNullOrWhiteSpace(ErrorMessage) == false)
-        {
-            <div class="alert alert-danger">@ErrorMessage</div>
-        }
-        <ValidationSummary />
-
         <div class="my-4">
-            <button class="btn btn-primary" type="submit" @onclick="HandleSelling_Click">Sell</button>
+            <button class="btn btn-primary" type="submit">Sell</button>
         </div>
 
     </EditForm>
