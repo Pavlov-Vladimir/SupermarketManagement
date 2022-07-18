@@ -1,28 +1,53 @@
 ﻿@page "/CashierConsole"
 
-<h3>Cashier's Console</h3>
+<div class="row mb-3">
+    <div class="col">
+        <h3>Cashier's Console</h3>
+    </div>
+    <div class="col-4">
+        <div class="input-group mb-3">
+            <span class="input-group-text">Cashier</span>
+            <input type="text" class="form-control" placeholder="Name" @bind-value="CashierName"
+                @bind-value:event="oninput" @onchange="HandleGhangeName">
+        </div>
+    </div>
+</div>
+
 
 <div class="row">
     <div class="col-4">
         <div class="form-control border-0">
             <SelectProductForSelling OnSelectProduct="HandleSelectProduct" />
 
-            <SellProduct SelectedProduct="SelectedProduct" OnSoldProduct="HandleSoldProduct" />
+            <SellProduct SelectedProduct="SelectedProduct" CashierName="@CashierName" OnSoldProduct="HandleSoldProduct" />
         </div>
+    </div>
+    <div class="col-8">
+        <TodayTransactionsByCashier @ref="TransactionsTable" />
     </div>
 </div>
 
 @code {
+    public string? CashierName { get; set; }
     public Product? SelectedProduct { get; set; }
     public Product? SoldProduct { get; set; }
+    public TodayTransactionsByCashier TransactionsTable { get; set; }
 
     private void HandleSelectProduct(Product product)
     {
         SelectedProduct = product;
     }
 
-    private void HandleSoldProduct(Product product)
+    private async Task HandleSoldProduct(Product product)
     {
         SoldProduct = product;
+        await TransactionsTable.LoadTransactions(CashierName);
+        StateHasChanged();
+    }
+
+    private async Task HandleGhangeName()
+    {
+        await TransactionsTable.LoadTransactions(CashierName);
+        StateHasChanged();
     }
 }

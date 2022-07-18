@@ -60,7 +60,7 @@ public class TransactionInMemoryRepository : ITransactionRepository
                     CashierName = cashierName,
                     ProductId = productId,
                     QtySold = qtySold,
-                    QtyBefore = product.Quantity,
+                    QtyBefore = product.Quantity + qtySold,
                     Price = product.Price,
                     TimeStamp = DateTime.Now
                 }));

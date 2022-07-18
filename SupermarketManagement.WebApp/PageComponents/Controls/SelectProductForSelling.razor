@@ -25,7 +25,7 @@
         <tbody>
             @foreach (var item in Products)
             {
-                <tr style="@(item.Id == selectedProductId ? "background-color:aqua; cursor:pointer;" : "cursor:pointer;")"
+                <tr style="@(item.Id == selectedProductId ? "background-color:beige; cursor:pointer;" : "cursor:pointer;")"
                     @onclick="(() => SelectProduct_Click(item))">
                     <td>@item.Name</td>
                     <td>@item.Quantity</td>

@@ -3,6 +3,8 @@
 public partial class SellProduct
 {
     [Parameter]
+    public string? CashierName { get; set; }
+    [Parameter]
     public Product? SelectedProduct { get; set; }
     [Parameter]
     public EventCallback<Product> OnSoldProduct { get; set; }
@@ -10,6 +12,8 @@ public partial class SellProduct
     public string? ErrorMessage { get; set; }
     [Inject]
     public ISellProductUseCase SellProductUseCase { get; set; } = null!;
+    [Inject]
+    public IRecordTransactionUseCase RecordTransactionUseCase { get; set; } = null!;
 
     protected override void OnParametersSet()
     {
@@ -32,25 +36,34 @@ public partial class SellProduct
         }
     }
 
-    private async Task HandleValidSubmit()
+    private void HandleValidSubmit()
     {
-        if (ProductToSell!.Quantity <= 0)
+        if (string.IsNullOrWhiteSpace(CashierName))
         {
-            ErrorMessage = $"The quantity to sell must be greater than zero. Change the number.";
-            StateHasChanged();
-        }
-        else if (ProductToSell!.Quantity > SelectedProduct!.Quantity)
-        {
-            ErrorMessage = $"The quantity of {SelectedProduct.Name} is not enough. Change the number.";
+            ErrorMessage = "Cashier's name is required. Enter your name.";
             StateHasChanged();
         }
         else
         {
-            await SellProductUseCase.Execute(ProductToSell.Id, ProductToSell.Quantity);
-            await OnSoldProduct.InvokeAsync(ProductToSell);
-            ErrorMessage = string.Empty;
-            ProductToSell.Quantity = 0;
-            StateHasChanged();
+            if (ProductToSell!.Quantity <= 0)
+            {
+                ErrorMessage = $"The quantity to sell must be greater than zero. Change the number.";
+                StateHasChanged();
+            }
+            else if (ProductToSell!.Quantity > SelectedProduct!.Quantity)
+            {
+                ErrorMessage = $"The quantity of {SelectedProduct.Name} is not enough. Change the number.";
+                StateHasChanged();
+            }
+            else
+            {
+                SellProductUseCase.Execute(ProductToSell.Id, ProductToSell.Quantity);
+                RecordTransactionUseCase.Execute(CashierName, ProductToSell.Id, ProductToSell.Quantity);
+                OnSoldProduct.InvokeAsync(ProductToSell);
+                ErrorMessage = string.Empty;
+                ProductToSell.Quantity = 0;
+                StateHasChanged();
+            }
         }
     }
 }

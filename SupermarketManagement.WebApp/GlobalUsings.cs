@@ -12,6 +12,6 @@ global using SupermarketManagement.WebApp.Data;
 global using SupermarketManagement.UseCases.UseCasesInterfaces;
 global using SupermarketManagement.UseCases.CategoriesUseCases;
 global using SupermarketManagement.UseCases.ProductsUseCasesInterfaces;
-global using SupermarketManagement.UseCases;
 global using SupermarketManagement.UseCases.ProductsUseCases;
-
+global using SupermarketManagement.UseCases.TransactionsUseCases;
+global using SupermarketManagement.UseCases.TransactionsUseCasesInterfaces;

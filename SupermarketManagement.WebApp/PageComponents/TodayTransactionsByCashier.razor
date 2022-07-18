@@ -1,0 +1,84 @@
+﻿<table class="table">
+    <thead>
+        <tr>
+            <th>Cashier</th>
+            <th>Product</th>
+            <th>Date Time</th>
+            <th>Qty Before</th>
+            <th>Qty Sold</th>
+            <th>Qty After</th>
+            <th>Price</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Transactions is not null)
+        {
+            @foreach (var item in Transactions)
+            {
+                <tr>
+                    <td>@item.CashierName</td>
+                    <td>@GetProductName(item.ProductId).Result</td>
+                    <td>@item.TimeStamp.ToString("dd/MM HH:mm")</td>
+                    <td>@item.QtyBefore</td>
+                    <td>@item.QtySold</td>
+                    <td>@(item.QtyBefore - item.QtySold)</td>
+                    <td>$@item.Price</td>
+                    <td>$@(item.QtySold * item.Price)</td>
+                </tr>
+            }
+        }
+        <tr>
+            <th colspan="7" class="text-end pe-5">Total Amount:</th>
+            <th>$@CountTotalAmount(Transactions);</th>
+        </tr>
+    </tbody>
+</table>
+
+@code {
+    //private decimal totalAmount = 0;
+    public List<Transaction>? Transactions { get; set; }
+    [Inject]
+    public IGetProductByIdUseCase GetProductByIdUseCase { get; set; } = null!;
+    [Inject]
+    public ITodayTransactionsByCashierUseCase TodayTransactionsByCashierUseCace { get; set; } = null!;
+
+    public async Task LoadTransactions(string cashierName)
+    {
+        try
+        {
+            Transactions = (await TodayTransactionsByCashierUseCace.Execute(cashierName))?.ToList();
+            StateHasChanged();
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+
+    }
+
+    private async Task<string?> GetProductName(int productId)
+    {
+        try
+        {
+            return (await GetProductByIdUseCase.Execute(productId))?.Name;
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+
+    private decimal CountTotalAmount(List<Transaction>? transaction)
+    {
+        decimal totalAmount = 0;
+        if (transaction is not null)
+        {
+            foreach (var item in transaction)
+            {
+                totalAmount += (item.QtySold * item.Price);
+            }
+        }
+        return totalAmount;
+    }
+}
