@@ -10,6 +10,8 @@ public partial class TransactionsReport
     public IGetProductByIdUseCase GetProductByIdUseCase { get; set; } = null!;
     [Inject]
     public ISearchTransactionsUseCase SearchTransactionsUseCase { get; set; } = null!;
+    [Inject]
+    public IJSRuntime JSRuntime { get; set; } = null!;
 
     public async Task LoadTransactions(string cashierName, DateTime from, DateTime to)
     {
@@ -48,5 +50,10 @@ public partial class TransactionsReport
         {
             throw;
         }
+    }
+
+    private void PrintReport()
+    {
+        JSRuntime.InvokeVoidAsync("print");
     }
 }

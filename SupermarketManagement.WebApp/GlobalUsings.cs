@@ -15,3 +15,4 @@ global using SupermarketManagement.UseCases.ProductsUseCasesInterfaces;
 global using SupermarketManagement.UseCases.ProductsUseCases;
 global using SupermarketManagement.UseCases.TransactionsUseCases;
 global using SupermarketManagement.UseCases.TransactionsUseCasesInterfaces;
+global using Microsoft.JSInterop;
