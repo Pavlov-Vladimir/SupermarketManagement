@@ -8,7 +8,7 @@
         <div class="input-group mb-3">
             <span class="input-group-text">Cashier</span>
             <input type="text" class="form-control" placeholder="Name" @bind-value="CashierName"
-                @bind-value:event="oninput" @onchange="HandleGhangeName">
+                   @bind-value:event="oninput" @onchange="HandleGhangeName">
         </div>
     </div>
 </div>
@@ -31,7 +31,7 @@
     public string? CashierName { get; set; }
     public Product? SelectedProduct { get; set; }
     public Product? SoldProduct { get; set; }
-    public TodayTransactionsByCashier TransactionsTable { get; set; }
+    public TodayTransactionsByCashier TransactionsTable { get; set; } = null!;
 
     private void HandleSelectProduct(Product product)
     {
@@ -41,13 +41,19 @@
     private async Task HandleSoldProduct(Product product)
     {
         SoldProduct = product;
-        await TransactionsTable.LoadTransactions(CashierName);
+        if (CashierName is not null)
+        {
+            await TransactionsTable.LoadTransactions(CashierName);
+        }
         StateHasChanged();
     }
 
     private async Task HandleGhangeName()
     {
-        await TransactionsTable.LoadTransactions(CashierName);
+        if (CashierName is not null)
+        {
+            await TransactionsTable.LoadTransactions(CashierName);
+        }
         StateHasChanged();
     }
 }

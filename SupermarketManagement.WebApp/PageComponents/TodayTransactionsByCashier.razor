@@ -11,9 +11,9 @@
             <th>Amount</th>
         </tr>
     </thead>
-    <tbody>
-        @if (Transactions is not null)
-        {
+    @if (Transactions is not null)
+    {
+        <tbody>
             @foreach (var item in Transactions)
             {
                 <tr>
@@ -23,20 +23,21 @@
                     <td>@item.QtyBefore</td>
                     <td>@item.QtySold</td>
                     <td>@(item.QtyBefore - item.QtySold)</td>
+                    <td>$@GetProductPrice(item.ProductId).Result</td>
                     <td>$@item.Price</td>
-                    <td>$@(item.QtySold * item.Price)</td>
                 </tr>
             }
-        }
-        <tr>
-            <th colspan="7" class="text-end pe-5">Total Amount:</th>
-            <th>$@CountTotalAmount(Transactions);</th>
-        </tr>
-    </tbody>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="7" class="text-end pe-5">Total Amount:</th>
+                <th>$@(Transactions.Sum(t => t.Price))</th>
+            </tr>
+        </tfoot>
+    }
 </table>
 
 @code {
-    //private decimal totalAmount = 0;
     public List<Transaction>? Transactions { get; set; }
     [Inject]
     public IGetProductByIdUseCase GetProductByIdUseCase { get; set; } = null!;
@@ -69,16 +70,16 @@
         }
     }
 
-    private decimal CountTotalAmount(List<Transaction>? transaction)
+    private async Task<decimal> GetProductPrice(int productId)
     {
-        decimal totalAmount = 0;
-        if (transaction is not null)
+        try
         {
-            foreach (var item in transaction)
-            {
-                totalAmount += (item.QtySold * item.Price);
-            }
+            var product = await GetProductByIdUseCase.Execute(productId);
+            return product is null ? 0 : product.Price;
         }
-        return totalAmount;
+        catch (Exception)
+        {
+            throw;
+        }
     }
 }

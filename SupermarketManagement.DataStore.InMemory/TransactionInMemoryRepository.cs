@@ -52,6 +52,7 @@ public class TransactionInMemoryRepository : ITransactionRepository
                 {
                     throw new EntityNotFoundException($"Id = {productId}");
                 }
+
                 int transactionId = CreateNewTransactionId();
 
                 await Task.Run(() => _transactions.Add(new Transaction
@@ -61,7 +62,7 @@ public class TransactionInMemoryRepository : ITransactionRepository
                     ProductId = productId,
                     QtySold = qtySold,
                     QtyBefore = product.Quantity + qtySold,
-                    Price = product.Price,
+                    Price = product.Price * qtySold,
                     TimeStamp = DateTime.Now
                 }));
             }
@@ -82,14 +83,19 @@ public class TransactionInMemoryRepository : ITransactionRepository
         {
             if (_transactions is not null)
             {
-                if (_transactions.Any())
+                if (string.IsNullOrWhiteSpace(cashierName))
                 {
-                    return await Task.Run(() => _transactions.Where(t =>
+                    return await Task.FromResult(_transactions.Where(t =>
+                        t.TimeStamp.Date >= beagineDate.Date &&
+                        t.TimeStamp.Date <= endDate.Date));
+                }
+                else
+                {
+                    return await Task.FromResult(_transactions.Where(t =>
                         t.CashierName.Equals(cashierName, StringComparison.InvariantCultureIgnoreCase) &&
                         t.TimeStamp.Date >= beagineDate.Date &&
                         t.TimeStamp.Date <= endDate.Date));
                 }
-                return null;
             }
             else
             {
