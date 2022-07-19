@@ -16,7 +16,7 @@ public partial class Products
     {
         try
         {
-            await GetProductsList();
+            ProductsList = (await ViewProductsUseCase.Execute())?.ToList();            
         }
         catch (Exception ex)
         {
@@ -24,10 +24,10 @@ public partial class Products
         }
     }
 
-    private async Task GetProductsList()
-    {
-        ProductsList = (await ViewProductsUseCase.Execute())?.ToList();
-    }
+    //private async Task<IEnumerable<Product>?> GetProductsList()
+    //{
+    //    return await ViewProductsUseCase.Execute();
+    //}
 
     private void HandleAddingProduct_Click()
     {
@@ -39,7 +39,7 @@ public partial class Products
         try
         {
             await DeleteProductUseCase.Execute(productId);
-            await GetProductsList();
+            ProductsList = (await ViewProductsUseCase.Execute())?.ToList();
         }
         catch (Exception ex)
         {

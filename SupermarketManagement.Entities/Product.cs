@@ -13,4 +13,6 @@ public class Product
     public int Quantity { get; set; }
     [Required]
     public decimal Price { get; set; }
+
+    public Category Category { get; set; } = null!;
 }

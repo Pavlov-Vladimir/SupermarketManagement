@@ -36,6 +36,7 @@
     [Inject]
     public IGetCategoryByIdUseCase GetCategoryByIdUseCase { get; set; } = null!;
 
+
     private async Task<string?> GetCategoryName(int categoryId)
     {
         return (await GetCategoryByIdUseCase.Execute(categoryId))?.Name;

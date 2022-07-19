@@ -5,10 +5,19 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 
+builder.Services.AddDbContext<MarketDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+);
+
 // DI for In-Memory data store
-builder.Services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
-builder.Services.AddScoped<IProductRepository, ProductInMemoryRepository>();
-builder.Services.AddScoped<ITransactionRepository, TransactionInMemoryRepository>();
+//builder.Services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
+//builder.Services.AddScoped<IProductRepository, ProductInMemoryRepository>();
+//builder.Services.AddScoped<ITransactionRepository, TransactionInMemoryRepository>();
+
+// DI for EF Core data store
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 
 // DI for Use Cases
 builder.Services.AddTransient<IViewCategoriesUseCase, ViewCategoriesUseCase>();

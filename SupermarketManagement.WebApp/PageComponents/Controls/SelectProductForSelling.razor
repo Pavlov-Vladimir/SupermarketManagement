@@ -1,19 +1,23 @@
-﻿<div class="form-group mb-3">
-    <label for="category">Category</label>
-    <select id="category" class="form-select" @bind="CategoryId">
-        @if (CategoryId == STARTED_CATEGORY_ID)
-        {
-            <option value="@STARTED_CATEGORY_ID" selected>Select Category...</option>
-        }
-        @foreach (var category in Categories!)
-        {
-            <option value="@category.Id">@category.Name</option>
-        }
-    </select>
-</div>
+﻿@if (Categories is not null)
+{
+    <div class="form-group mb-3">
+        <label for="category">Category</label>
+        <select id="category" class="form-select" @bind="CategoryId">
+            @if (CategoryId == STARTED_CATEGORY_ID)
+            {
+                <option value="@STARTED_CATEGORY_ID" selected>Select Category...</option>
+            }
+            @foreach (var category in Categories)
+            {
+                <option value="@category.Id">@category.Name</option>
+            }
+        </select>
+    </div>
+}
+
 
 @if (Products is not null)
-{    
+{
     <table class="table table-hover caption-top mb-5">
         <caption class="mb-0">List of products:</caption>
         <thead>
@@ -26,7 +30,7 @@
             @foreach (var item in Products)
             {
                 <tr style="@(item.Id == selectedProductId ? "background-color:beige; cursor:pointer;" : "cursor:pointer;")"
-                    @onclick="(() => SelectProduct_Click(item))">
+            @onclick="(() => SelectProduct_Click(item))">
                     <td>@item.Name</td>
                     <td>@item.Quantity</td>
                 </tr>

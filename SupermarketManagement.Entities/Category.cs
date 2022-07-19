@@ -7,4 +7,6 @@ public class Category
     public string Name { get; set; } = null!;
     [MaxLength(250)]
     public string? Description { get; set; }
+
+    public List<Product>? Products { get; set; }
 }
