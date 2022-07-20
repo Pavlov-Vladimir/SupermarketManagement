@@ -8,8 +8,8 @@ public class DeleteProductUseCase : IDeleteProductUseCase
         _productRepository = productRepository;
     }
 
-    public async Task Execute(int productId)
+    public void Execute(int productId)
     {
-        await _productRepository.DeleteProduct(productId);
+        _productRepository.DeleteProduct(productId);
     }
 }

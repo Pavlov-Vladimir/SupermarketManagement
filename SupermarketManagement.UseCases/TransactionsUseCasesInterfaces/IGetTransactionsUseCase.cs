@@ -2,5 +2,5 @@
 
 public interface IGetTransactionsUseCase
 {
-    Task<IEnumerable<Transaction>?> Execute();
+    IEnumerable<Transaction>? Execute();
 }

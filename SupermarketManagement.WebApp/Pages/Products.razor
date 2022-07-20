@@ -13,7 +13,7 @@ else if (ErrorMessage is not null)
 else
 {
     @if (ProductsList!.Any())
-    {
+    {        
         <ProductsTable Products="@ProductsList" HandleDeleting_Click="HandleDeleting" />
     }
     else

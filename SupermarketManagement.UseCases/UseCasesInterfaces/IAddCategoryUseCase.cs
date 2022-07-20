@@ -2,5 +2,5 @@
 
 public interface IAddCategoryUseCase
 {
-    Task Execute(Category category);
+    void Execute(Category category);
 }

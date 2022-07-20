@@ -1,10 +1,10 @@
 ﻿namespace SupermarketManagement.UseCases.DataStorePlaginInterfaces;
 public interface IProductRepository
 {
-    Task<IEnumerable<Product>?> GetProducts();
-    Task AddProduct(Product product);
-    Task UpdateProduct(Product product);
-    Task<Product?> GetProduct(int productId);
-    Task DeleteProduct(int productId);
-    Task<IEnumerable<Product>?> GetProductsByCategoryId(int categoryId);
+    IEnumerable<Product>? GetProducts();
+    void AddProduct(Product product);
+    void UpdateProduct(Product product);
+    Product? GetProduct(int productId);
+    void DeleteProduct(int productId);
+    IEnumerable<Product>? GetProductsByCategoryId(int categoryId);
 }

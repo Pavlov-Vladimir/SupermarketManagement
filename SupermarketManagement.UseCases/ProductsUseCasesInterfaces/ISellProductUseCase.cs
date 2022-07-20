@@ -2,5 +2,5 @@
 
 public interface ISellProductUseCase
 {
-    Task Execute(int productId, int qtyToSell);
+    void Execute(int productId, int qtyToSell);
 }

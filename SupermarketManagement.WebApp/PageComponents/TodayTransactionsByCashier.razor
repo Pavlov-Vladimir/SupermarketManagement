@@ -18,12 +18,12 @@
             {
                 <tr>
                     <td>@item.CashierName</td>
-                    <td>@GetProductName(item.ProductId).Result</td>
+                    <td>@GetProductName(item.ProductId)</td>
                     <td>@item.TimeStamp.ToString("dd/MM HH:mm")</td>
                     <td>@item.QtyBefore</td>
                     <td>@item.QtySold</td>
                     <td>@(item.QtyBefore - item.QtySold)</td>
-                    <td>$@GetProductPrice(item.ProductId).Result</td>
+                    <td>$@GetProductPrice(item.ProductId)</td>
                     <td>$@item.Price</td>
                 </tr>
             }
@@ -44,11 +44,11 @@
     [Inject]
     public ITodayTransactionsByCashierUseCase TodayTransactionsByCashierUseCace { get; set; } = null!;
 
-    public async Task LoadTransactions(string cashierName)
+    public void LoadTransactions(string cashierName)
     {
         try
         {
-            Transactions = (await TodayTransactionsByCashierUseCace.Execute(cashierName))?.ToList();
+            Transactions = TodayTransactionsByCashierUseCace.Execute(cashierName)?.ToList();
             StateHasChanged();
         }
         catch (Exception)
@@ -58,11 +58,11 @@
 
     }
 
-    private async Task<string?> GetProductName(int productId)
+    private string? GetProductName(int productId)
     {
         try
         {
-            return (await GetProductByIdUseCase.Execute(productId))?.Name;
+            return GetProductByIdUseCase.Execute(productId)?.Name;
         }
         catch (Exception)
         {
@@ -70,11 +70,11 @@
         }
     }
 
-    private async Task<decimal> GetProductPrice(int productId)
+    private decimal GetProductPrice(int productId)
     {
         try
         {
-            var product = await GetProductByIdUseCase.Execute(productId);
+            var product = GetProductByIdUseCase.Execute(productId);
             return product is null ? 0 : product.Price;
         }
         catch (Exception)

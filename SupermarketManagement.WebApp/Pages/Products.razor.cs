@@ -12,11 +12,11 @@ public partial class Products
     [Inject]
     public IDeleteProductUseCase DeleteProductUseCase { get; set; } = null!;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         try
         {
-            ProductsList = (await ViewProductsUseCase.Execute())?.ToList();            
+            ProductsList = ViewProductsUseCase.Execute()?.ToList();            
         }
         catch (Exception ex)
         {
@@ -24,22 +24,17 @@ public partial class Products
         }
     }
 
-    //private async Task<IEnumerable<Product>?> GetProductsList()
-    //{
-    //    return await ViewProductsUseCase.Execute();
-    //}
-
     private void HandleAddingProduct_Click()
     {
         NavigationManager.NavigateTo("/AddProduct");
     }
 
-    private async Task HandleDeleting(int productId)
+    private void HandleDeleting(int productId)
     {
         try
         {
-            await DeleteProductUseCase.Execute(productId);
-            ProductsList = (await ViewProductsUseCase.Execute())?.ToList();
+            DeleteProductUseCase.Execute(productId);
+            ProductsList = ViewProductsUseCase.Execute()?.ToList();
         }
         catch (Exception ex)
         {

@@ -13,13 +13,13 @@ public partial class AddProduct
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         try
         {
             Product = new Product();
             Product.CategoryId = STARTED_CATEGORY_ID;
-            Categories = await ViewCategoriesUseCase.Execute();
+            Categories = ViewCategoriesUseCase.Execute();
         }
         catch (Exception ex)
         {
@@ -27,12 +27,12 @@ public partial class AddProduct
         }
     }
 
-    protected async Task HandleValidSubmit(Product product)
+    protected void HandleValidSubmit(Product product)
     {
         try
         {
             product.Price = Math.Round(product.Price, 2);
-            await AddProductUseCase.Execute(product);
+            AddProductUseCase.Execute(product);
             NavigationManager.NavigateTo("/Products");
         }
         catch (Exception ex)

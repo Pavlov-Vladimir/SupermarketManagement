@@ -8,8 +8,8 @@ public class GetProductByIdUseCase : IGetProductByIdUseCase
         _productRepository = productRepository;
     }
 
-    public async Task<Product?> Execute(int productId)
+    public Product? Execute(int productId)
     {
-        return await _productRepository.GetProduct(productId);
+        return _productRepository.GetProduct(productId);
     }
 }

@@ -1,6 +1,4 @@
-﻿using SupermarketManagement.Entities;
-
-namespace SupermarketManagement.DataStore.SQL;
+﻿namespace SupermarketManagement.DataStore.SQL;
 public class ProductRepository : IProductRepository
 {
     private readonly MarketDbContext _dbContext;
@@ -10,101 +8,49 @@ public class ProductRepository : IProductRepository
         _dbContext = dbContext;
     }
 
-    public async Task AddProduct(Product product)
+    public void AddProduct(Product product)
     {
-        try
-        {
-            product.Id = await CreateProductId();
-            await _dbContext.Products.AddAsync(product);
-            await _dbContext.SaveChangesAsync();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        _dbContext.Products.Add(product);
+        _dbContext.SaveChanges();
     }
 
-    private async Task<int> CreateProductId()
+    public void DeleteProduct(int productId)
     {
-        return await _dbContext.Products.AnyAsync() ? await _dbContext.Products.MaxAsync(p => p.Id) : 1;
+        var product = _dbContext.Products.SingleOrDefault(p => p.Id == productId);
+        if (product == null) return;
+
+        var category = _dbContext.Categories.SingleOrDefault(c => c.Id == product.CategoryId);
+        category?.Products?.Remove(product);
+        _dbContext.Products.Remove(product);
+        _dbContext.SaveChanges();
     }
 
-    public async Task DeleteProduct(int productId)
+    public Product? GetProduct(int productId)
     {
-        try
-        {
-            var product = await _dbContext.Products.SingleOrDefaultAsync(p => p.Id == productId);
-            if (product == null)
-            {
-                return;
-            }
-            _dbContext.Products.Remove(product);
-            await _dbContext.SaveChangesAsync();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        return _dbContext.Products.SingleOrDefault(p => p.Id == productId);
     }
 
-    public async Task<Product?> GetProduct(int productId)
+    public IEnumerable<Product>? GetProducts()
     {
-        try
-        {
-            return await _dbContext.Products.SingleOrDefaultAsync(p => p.Id == productId);
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        return _dbContext.Products.AsEnumerable();
     }
 
-    public async Task<IEnumerable<Product>?> GetProducts()
+    public IEnumerable<Product>? GetProductsByCategoryId(int categoryId)
     {
-        try
-        {
-            return await _dbContext.Products.ToListAsync();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        return _dbContext.Products.Where(p => p.CategoryId == categoryId).AsEnumerable();
     }
 
-    public async Task<IEnumerable<Product>?> GetProductsByCategoryId(int categoryId)
+    public void UpdateProduct(Product product)
     {
-        try
-        {
-            return await _dbContext.Products
-                .Where(p => p.CategoryId == categoryId)
-                .ToListAsync();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-    }
+        var productToUpdate = _dbContext.Products.SingleOrDefault(p => p.Id == product.Id);
+        if (productToUpdate == null) return;
 
-    public async Task UpdateProduct(Product product)
-    {
-        try
-        {
-            var productToUpdate = await _dbContext.Products.SingleOrDefaultAsync(p => p.Id == product.Id);
-            if (productToUpdate == null)
-            {
-                return;
-            }
-            productToUpdate.Name = product.Name;
-            productToUpdate.Price = product.Price;
-            productToUpdate.Quantity = product.Quantity;
-            productToUpdate.CategoryId = product.CategoryId;
-            productToUpdate.Category = product.Category;
+        productToUpdate.Name = product.Name;
+        productToUpdate.Price = product.Price;
+        productToUpdate.Quantity = product.Quantity;
+        productToUpdate.Category = product.Category;
+        productToUpdate.CategoryId = product.CategoryId;
 
-            await _dbContext.SaveChangesAsync();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        _dbContext.SaveChanges();
     }
 }

@@ -2,5 +2,5 @@
 
 public interface IViewProductsByCategoryIdUseCase
 {
-    Task<IEnumerable<Product>?> Execute(int categoryId);
+    IEnumerable<Product>? Execute(int categoryId);
 }

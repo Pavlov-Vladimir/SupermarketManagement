@@ -2,5 +2,5 @@
 
 public interface IViewCategoriesUseCase
 {
-    Task<IEnumerable<Category>?> Execute();
+    IEnumerable<Category>? Execute();
 }

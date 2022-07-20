@@ -8,8 +8,8 @@ public class DeleteCategoryUseCase : IDeleteCategoryUseCase
         _categoryRepository = categoryRepository;
     }
 
-    public async Task Execute(int categoryId)
+    public void Execute(int categoryId)
     {
-        await _categoryRepository.DeleteCategory(categoryId);
+        _categoryRepository.DeleteCategory(categoryId);
     }
 }

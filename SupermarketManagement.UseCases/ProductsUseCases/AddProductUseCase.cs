@@ -8,8 +8,8 @@ public class AddProductUseCase : IAddProductUseCase
         _productRepository = productRepository;
     }
 
-    public async Task Execute(Product product)
+    public void Execute(Product product)
     {
-        await _productRepository.AddProduct(product);
+        _productRepository.AddProduct(product);        
     }
 }

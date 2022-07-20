@@ -8,8 +8,8 @@ public class GetCategoryByIdUseCase : IGetCategoryByIdUseCase
         _categoryRepository = categoryRepository;
     }
 
-    public async Task<Category?> Execute(int categoryId)
+    public Category? Execute(int categoryId)
     {
-        return await _categoryRepository.GetCategoryById(categoryId);
+        return _categoryRepository.GetCategoryById(categoryId);
     }
 }

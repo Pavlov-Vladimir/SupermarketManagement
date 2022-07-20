@@ -59,11 +59,11 @@
                     <tr>
                         <td>@item.TimeStamp.ToString("g")</td>
                         <td>@item.CashierName</td>
-                        <td>@GetProductName(item.ProductId).Result</td>
+                        <td>@GetProductName(item.ProductId)</td>
                         <td>@item.QtyBefore</td>
                         <td>@item.QtySold</td>
                         <td>@(item.QtyBefore - item.QtySold)</td>
-                        <td>$@GetProductPrice(item.ProductId).Result</td>
+                        <td>$@GetProductPrice(item.ProductId)</td>
                         <td>$@item.Price</td>
                     </tr>
                 }

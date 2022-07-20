@@ -1,6 +1,4 @@
-﻿using SupermarketManagement.Entities;
-
-namespace SupermarketManagement.DataStore.SQL;
+﻿namespace SupermarketManagement.DataStore.SQL;
 public class CategoryRepository : ICategoryRepository
 {
     private readonly MarketDbContext _dbContext;
@@ -10,85 +8,45 @@ public class CategoryRepository : ICategoryRepository
         _dbContext = dbContext;
     }
 
-    public async Task AddCategory(Category category)
+    public void AddCategory(Category category)
     {
-        try
-        {
-            category.Id = await CreateCategoryId();
-            await _dbContext.Categories.AddAsync(category);
-            await _dbContext.SaveChangesAsync();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        _dbContext.Categories.Add(category);
+        _dbContext.SaveChanges();
     }
 
-    private async Task<int> CreateCategoryId()
+    public void DeleteCategory(int id)
     {
-        return await _dbContext.Categories.AnyAsync() ? await _dbContext.Categories.MaxAsync(c => c.Id) : 1;
-    }
-
-    public async Task DeleteCategory(int id)
-    {
-        try
+        var category = _dbContext.Categories.SingleOrDefault(c => c.Id == id);
+        if (category == null)
         {
-            var category = await _dbContext.Categories.SingleOrDefaultAsync(c => c.Id == id);
-            if (category == null)
-            {
-                return;
-            }
+            return;
+        }
+        if (category.Products?.Any() == false)
+        {
             _dbContext.Categories.Remove(category);
-            await _dbContext.SaveChangesAsync();
-        }
-        catch (Exception)
-        {
-            throw;
+            _dbContext.SaveChanges(); 
         }
     }
 
-    public async Task<IEnumerable<Category>?> GetCategories()
+    public IEnumerable<Category>? GetCategories()
     {
-        try
-        {
-            return await _dbContext.Categories.ToListAsync();
-        }
-        catch (Exception)
-        {
-
-            throw;
-        }
+        return _dbContext.Categories.AsEnumerable();
     }
 
-    public async Task<Category?> GetCategoryById(int categoryId)
+    public Category? GetCategoryById(int categoryId)
     {
-        try
-        {
-            return await _dbContext.Categories.SingleOrDefaultAsync(c => c.Id == categoryId);
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        return _dbContext.Categories.SingleOrDefault(c => c.Id == categoryId);
     }
 
-    public async Task UpdateCategory(Category category)
+    public void UpdateCategory(Category category)
     {
-        try
-        {
-            var categoryToUpdate = await _dbContext.Categories.SingleOrDefaultAsync(c => c.Id == category.Id);
-            if (categoryToUpdate == null)
-            {
-                return;
-            }
-            categoryToUpdate.Name = category.Name;
-            categoryToUpdate.Description = category.Description;
-            categoryToUpdate.Products = category.Products;
-            await _dbContext.SaveChangesAsync();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        var categoryToUpdate = _dbContext.Categories.SingleOrDefault(c => c.Id == category.Id);
+        if (categoryToUpdate == null) return;
+
+        categoryToUpdate.Name = category.Name;
+        categoryToUpdate.Description = category.Description;
+        categoryToUpdate.Products = category.Products;
+
+        _dbContext.SaveChanges();
     }
 }

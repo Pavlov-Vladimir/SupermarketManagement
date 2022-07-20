@@ -8,8 +8,8 @@ public class TodayTransactionsByCashierUseCase : ITodayTransactionsByCashierUseC
         _transactionRepository = transactionRepository;
     }
 
-    public async Task<IEnumerable<Transaction>?> Execute(string cashierName)
+    public IEnumerable<Transaction>? Execute(string cashierName)
     {
-        return await _transactionRepository.SearchTransactions(cashierName, DateTime.Today, DateTime.Today);
+        return _transactionRepository.SearchTransactions(cashierName, DateTime.Today, DateTime.Today);
     }
 }

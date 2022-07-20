@@ -17,11 +17,11 @@ public partial class Categories
 
     public string? ErrorMessage { get; set; }
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         try
         {
-            _categories = (await ViewCategoriesUseCase.Execute())?.ToList();
+            _categories = ViewCategoriesUseCase.Execute()?.ToList();
         }
         catch (Exception ex)
         {
@@ -35,18 +35,24 @@ public partial class Categories
         NavigationManager.NavigateTo("/AddCategory");
     }
 
-    protected async Task HandleDeleting_Click(int categoryId)
+    protected void HandleDeleting_Click(int categoryId)
     {
-        var productsByCategoryId = await ViewProductsByCategoryIdUseCase.Execute(categoryId);
+        //var productsByCategoryId = ViewProductsByCategoryIdUseCase.Execute(categoryId);
+        var categoryToDelete = GetCategoryByIdUseCase.Execute(categoryId);
 
-        if (productsByCategoryId is not null)
+        if (categoryToDelete == null)
+        {
+            ErrorMessage = "The category is not exists and cannot be deleted.";
+            StateHasChanged();
+        }
+        else if (categoryToDelete.Products != null && categoryToDelete.Products.Any())
         {
             ErrorMessage = "The category cannot be deleted because it contains products.";
             StateHasChanged();
         }
         else
         {
-            await DeleteCategoryUseCase.Execute(categoryId);
+            DeleteCategoryUseCase.Execute(categoryId);
             var category = _categories!.First(c => c.Id == categoryId);
             _categories!.Remove(category);
         }

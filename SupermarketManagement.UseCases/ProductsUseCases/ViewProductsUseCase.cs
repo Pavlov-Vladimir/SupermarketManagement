@@ -8,8 +8,8 @@ public class ViewProductsUseCase : IViewProductsUseCase
         _productsRepository = productsRepository;
     }
 
-    public async Task<IEnumerable<Product>?> Execute()
+    public IEnumerable<Product>? Execute()
     {
-        return await _productsRepository.GetProducts();
+        return _productsRepository.GetProducts();
     }
 }

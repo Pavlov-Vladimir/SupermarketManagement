@@ -32,12 +32,12 @@ else
     [Inject]
     public NavigationManager NavigationManager { get; set; } = null!;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         try
         {
-            Product = await GetProductByIdUseCase.Execute(ProductId);
-            Categories = await ViewCategoriesUseCase.Execute();
+            Product = GetProductByIdUseCase.Execute(ProductId);
+            Categories = ViewCategoriesUseCase.Execute();
         }
         catch (Exception ex)
         {
@@ -45,12 +45,12 @@ else
         }        
     }
 
-    protected async Task HandleValidSubmit(Product product)
+    protected void HandleValidSubmit(Product product)
     {
         try
         {
             product.Price = Math.Round(product.Price, 2);
-            await EditProductUseCase.Execute(product);
+            EditProductUseCase.Execute(product);
             NavigationManager.NavigateTo("/Products");
         }
         catch (Exception ex)

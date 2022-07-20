@@ -8,8 +8,8 @@ public class GetTransactionsByDateUseCase : IGetTransactionsByDateUseCase
         _transactionRepository = transactionRepository;
     }
 
-    public async Task<IEnumerable<Transaction>?> Execute(DateTime date)
+    public IEnumerable<Transaction>? Execute(DateTime date)
     {
-        return await _transactionRepository.GetByDate(date);
+        return _transactionRepository.GetByDate(date);
     }
 }

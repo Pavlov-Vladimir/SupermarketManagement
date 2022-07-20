@@ -8,8 +8,8 @@ public class ViewCategoriesUseCase : IViewCategoriesUseCase
         _categoryRepository = categoryRepository;
     }
 
-    public async Task<IEnumerable<Category>?> Execute()
+    public IEnumerable<Category>? Execute()
     {
-        return await _categoryRepository.GetCategories();
+        return _categoryRepository.GetCategories();
     }
 }

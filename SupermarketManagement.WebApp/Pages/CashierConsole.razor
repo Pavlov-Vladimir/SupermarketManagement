@@ -38,21 +38,21 @@
         SelectedProduct = product;
     }
 
-    private async Task HandleSoldProduct(Product product)
+    private void HandleSoldProduct(Product product)
     {
         SoldProduct = product;
         if (CashierName is not null)
         {
-            await TransactionsTable.LoadTransactions(CashierName);
+            TransactionsTable.LoadTransactions(CashierName);
         }
         StateHasChanged();
     }
 
-    private async Task HandleGhangeName()
+    private void HandleGhangeName()
     {
         if (CashierName is not null)
         {
-            await TransactionsTable.LoadTransactions(CashierName);
+            TransactionsTable.LoadTransactions(CashierName);
         }
         StateHasChanged();
     }

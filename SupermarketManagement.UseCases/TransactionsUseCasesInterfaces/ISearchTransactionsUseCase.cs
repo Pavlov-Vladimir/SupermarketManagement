@@ -2,5 +2,5 @@
 
 public interface ISearchTransactionsUseCase
 {
-    Task<IEnumerable<Transaction>?> Execute(string cashierName, DateTime beagineDate, DateTime endDate);
+    IEnumerable<Transaction>? Execute(string cashierName, DateTime beagineDate, DateTime endDate);
 }

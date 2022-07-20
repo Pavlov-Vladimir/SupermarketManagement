@@ -2,5 +2,5 @@
 
 public interface IGetTransactionsByDateUseCase
 {
-    Task<IEnumerable<Transaction>?> Execute(DateTime date);
+    IEnumerable<Transaction>? Execute(DateTime date);
 }

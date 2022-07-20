@@ -2,5 +2,5 @@
 
 public interface IRecordTransactionUseCase
 {
-    Task Execute(string cashierName, int productId, int qtySold);
+    void Execute(string cashierName, int productId, int qtySold);
 }

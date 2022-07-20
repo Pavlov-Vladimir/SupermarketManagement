@@ -1,6 +1,4 @@
-﻿using SupermarketManagement.Entities;
-
-namespace SupermarketManagement.WebApp.PageComponents.Controls;
+﻿namespace SupermarketManagement.WebApp.PageComponents.Controls;
 
 public partial class SelectProductForSelling
 {
@@ -17,7 +15,7 @@ public partial class SelectProductForSelling
             _categoryId = value;
             if (_categoryId > 0)
             {
-                _ = GetProductsList(_categoryId);
+                GetProductsList(_categoryId);
             }
         }
     }
@@ -28,16 +26,16 @@ public partial class SelectProductForSelling
     [Inject]
     public IViewCategoriesUseCase ViewCategoriesUseCase { get; set; } = null!;
 
-    protected override async Task OnInitializedAsync()
+    protected override void OnInitialized()
     {
         CategoryId = STARTED_CATEGORY_ID;
-        Categories = await ViewCategoriesUseCase.Execute();
+        Categories = ViewCategoriesUseCase.Execute();
     }
 
-    private async Task GetProductsList(int categoryId)
+    private void GetProductsList(int categoryId)
     {
-        Products = await ViewProductsByCategoryId.Execute(categoryId);
-        await OnSelectProduct.InvokeAsync(null);        
+        Products = ViewProductsByCategoryId.Execute(categoryId);
+        OnSelectProduct.InvokeAsync(null);        
     }
 
     private void SelectProduct_Click(Product product)

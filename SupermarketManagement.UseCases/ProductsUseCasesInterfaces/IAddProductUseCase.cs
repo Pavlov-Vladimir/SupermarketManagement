@@ -2,5 +2,5 @@
 
 public interface IAddProductUseCase
 {
-    Task Execute(Product product);
+    void Execute(Product product);
 }

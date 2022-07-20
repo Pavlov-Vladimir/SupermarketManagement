@@ -8,8 +8,8 @@ public class EditCategoryUseCase : IEditCategoryUseCase
         _categoryRepository = categoryRepository;
     }
 
-    public async Task Execute(Category category)
+    public void Execute(Category category)
     {
-        await _categoryRepository.UpdateCategory(category);
+        _categoryRepository.UpdateCategory(category);
     }
 }

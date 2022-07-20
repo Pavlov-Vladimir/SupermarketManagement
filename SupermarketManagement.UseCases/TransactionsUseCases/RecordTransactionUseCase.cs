@@ -10,12 +10,12 @@ public class RecordTransactionUseCase : IRecordTransactionUseCase
         _productRepository = productRepository;
     }
 
-    public async Task Execute(string cashierName, int productId, int qtySold)
+    public void Execute(string cashierName, int productId, int qtySold)
     {
-        var product = await _productRepository.GetProduct(productId);
+        var product = _productRepository.GetProduct(productId);
         if (product == null)
             return;
 
-        await _transactionRepository.Save(cashierName, productId, qtySold);
+        _transactionRepository.Save(cashierName, productId, qtySold);
     }
 }

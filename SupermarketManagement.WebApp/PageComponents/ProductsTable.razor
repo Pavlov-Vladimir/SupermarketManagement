@@ -13,7 +13,7 @@
         {
             <tr>
                 <td>@product.Name</td>
-                <td>@GetCategoryName(product.CategoryId).Result</td>
+                <td>@GetCategoryName(product.CategoryId)</td>
                 <td>@product.Quantity</td>
                 <td>$ @product.Price</td>
                 <td class="text-center">
@@ -37,8 +37,8 @@
     public IGetCategoryByIdUseCase GetCategoryByIdUseCase { get; set; } = null!;
 
 
-    private async Task<string?> GetCategoryName(int categoryId)
+    private string? GetCategoryName(int categoryId)
     {
-        return (await GetCategoryByIdUseCase.Execute(categoryId))?.Name;
+        return GetCategoryByIdUseCase.Execute(categoryId)?.Name;
     }
 }

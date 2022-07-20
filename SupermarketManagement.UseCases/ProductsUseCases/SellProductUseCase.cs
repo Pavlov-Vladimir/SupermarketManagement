@@ -8,12 +8,13 @@ public class SellProductUseCase : ISellProductUseCase
         _productRepository = productRepository;
     }
 
-    public async Task Execute(int productId, int qtyToSell)
+    public void Execute(int productId, int qtyToSell)
     {
-        var product = await _productRepository.GetProduct(productId);
+        var product = _productRepository.GetProduct(productId);
         if (product is null)
             return;
+
         product.Quantity -= qtyToSell;
-        await _productRepository.UpdateProduct(product);
+        _productRepository.UpdateProduct(product);
     }
 }

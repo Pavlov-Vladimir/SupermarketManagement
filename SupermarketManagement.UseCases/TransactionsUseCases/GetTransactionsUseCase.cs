@@ -8,8 +8,8 @@ public class GetTransactionsUseCase : IGetTransactionsUseCase
         _transactionRepository = transactionRepository;
     }
 
-    public async Task<IEnumerable<Transaction>?> Execute()
+    public IEnumerable<Transaction>? Execute()
     {
-        return await _transactionRepository.GetTransactions();
+        return _transactionRepository.GetTransactions();
     }
 }

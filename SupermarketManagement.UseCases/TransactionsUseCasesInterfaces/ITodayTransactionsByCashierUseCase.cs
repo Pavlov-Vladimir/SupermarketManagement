@@ -2,5 +2,5 @@
 
 public interface ITodayTransactionsByCashierUseCase
 {
-    Task<IEnumerable<Transaction>?> Execute(string cashierName);
+    IEnumerable<Transaction>? Execute(string cashierName);
 }
