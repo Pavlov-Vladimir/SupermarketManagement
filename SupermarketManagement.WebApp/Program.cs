@@ -3,16 +3,25 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<WeatherForecastService>();
 
 builder.Services.AddDbContext<MarketDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-);
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
-// DI for In-Memory data store
-//builder.Services.AddScoped<ICategoryRepository, CategoryInMemoryRepository>();
-//builder.Services.AddScoped<IProductRepository, ProductInMemoryRepository>();
-//builder.Services.AddScoped<ITransactionRepository, TransactionInMemoryRepository>();
+builder.Services.AddDbContext<AccountContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("AccountContextConnection"));
+});
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<AccountContext>();
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminOnly", p => p.RequireClaim("Position", "Admin"));
+    options.AddPolicy("CashierOnly", p => p.RequireClaim("Position", "Cashier"));
+});
 
 // DI for EF Core data store
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -56,7 +65,12 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapRazorPages();
 app.MapBlazorHub();
 app.MapFallbackToPage("/_Host");
+
 
 app.Run();

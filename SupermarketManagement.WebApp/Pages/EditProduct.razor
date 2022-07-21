@@ -1,4 +1,5 @@
 ﻿@page "/EditProduct/{ProductId:int}"
+@attribute [Authorize(Policy = "AdminOnly")]
 
 <h3>Edit Product "@Product?.Name"</h3>
 

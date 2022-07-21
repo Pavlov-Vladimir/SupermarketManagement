@@ -17,3 +17,4 @@ global using SupermarketManagement.UseCases.TransactionsUseCasesInterfaces;
 global using Microsoft.JSInterop;
 global using SupermarketManagement.DataStore.SQL;
 global using Microsoft.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Identity;

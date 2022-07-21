@@ -1,6 +1,6 @@
 ﻿namespace SupermarketManagement.WebApp.Pages;
 
-public partial class Products
+public partial class Products : ComponentBase
 {
     public List<Product>? ProductsList { get; set; }
     public string? ErrorMessage { get; set; }

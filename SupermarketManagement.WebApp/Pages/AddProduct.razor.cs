@@ -1,6 +1,6 @@
 ﻿namespace SupermarketManagement.WebApp.Pages;
 
-public partial class AddProduct
+public partial class AddProduct : ComponentBase
 {
     private const int STARTED_CATEGORY_ID = -1;
     public Product? Product { get; set; }
@@ -17,8 +17,7 @@ public partial class AddProduct
     {
         try
         {
-            Product = new Product();
-            Product.CategoryId = STARTED_CATEGORY_ID;
+            Product = new() { CategoryId = STARTED_CATEGORY_ID };
             Categories = ViewCategoriesUseCase.Execute();
         }
         catch (Exception ex)

@@ -1,6 +1,6 @@
 ﻿namespace SupermarketManagement.WebApp.Pages;
 
-public partial class Categories
+public partial class Categories : ComponentBase
 {
     private List<Category>? _categories;
 
@@ -19,15 +19,7 @@ public partial class Categories
 
     protected override void OnInitialized()
     {
-        try
-        {
-            _categories = ViewCategoriesUseCase.Execute()?.ToList();
-        }
-        catch (Exception ex)
-        {
-            ErrorMessage = ex.Message;
-            StateHasChanged();
-        }
+        _categories = ViewCategoriesUseCase.Execute()?.ToList();
     }
 
     private void HandleAddingCategory_Click()
@@ -37,7 +29,6 @@ public partial class Categories
 
     protected void HandleDeleting_Click(int categoryId)
     {
-        //var productsByCategoryId = ViewProductsByCategoryIdUseCase.Execute(categoryId);
         var categoryToDelete = GetCategoryByIdUseCase.Execute(categoryId);
 
         if (categoryToDelete == null)

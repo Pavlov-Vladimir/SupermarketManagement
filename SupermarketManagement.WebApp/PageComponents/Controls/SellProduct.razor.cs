@@ -1,6 +1,6 @@
 ﻿namespace SupermarketManagement.WebApp.PageComponents.Controls;
 
-public partial class SellProduct
+public partial class SellProduct : ComponentBase
 {
     [Parameter]
     public string? CashierName { get; set; }
@@ -17,8 +17,6 @@ public partial class SellProduct
 
     protected override void OnParametersSet()
     {
-        base.OnParametersSet();
-
         if (SelectedProduct is not null)
         {
             ProductToSell = new Product

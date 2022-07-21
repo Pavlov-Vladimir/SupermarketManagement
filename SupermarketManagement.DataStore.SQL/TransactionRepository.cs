@@ -48,7 +48,7 @@ public class TransactionRepository : ITransactionRepository
                 .AsEnumerable();
         }
         return _dbContext.Transactions
-            .Where(t => t.CashierName == cashierName)
+            .Where(t => EF.Functions.Like(t.CashierName, $"%{cashierName}%"))
             .Where(t => t.TimeStamp.Date >= beagineDate.Date)
             .Where(t => t.TimeStamp.Date <= endDate.Date)
             .AsEnumerable();

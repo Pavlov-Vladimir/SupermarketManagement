@@ -1,7 +1,7 @@
 ﻿namespace SupermarketManagement.DataStore.SQL;
 public class MarketDbContext : DbContext
 {
-    public MarketDbContext(DbContextOptions options) : base(options)
+    public MarketDbContext(DbContextOptions<MarketDbContext> options) : base(options)
     {
     }
 

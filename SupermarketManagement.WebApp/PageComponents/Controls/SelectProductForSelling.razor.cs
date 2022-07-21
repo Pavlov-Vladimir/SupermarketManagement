@@ -1,6 +1,6 @@
 ﻿namespace SupermarketManagement.WebApp.PageComponents.Controls;
 
-public partial class SelectProductForSelling
+public partial class SelectProductForSelling : ComponentBase
 {
     [Parameter]
     public EventCallback<Product?> OnSelectProduct { get; set; }

@@ -1,37 +1,50 @@
 ﻿@page "/CashierConsole"
+@attribute [Authorize(Policy = "CashierOnly")]
 
-<div class="row mb-3">
-    <div class="col">
-        <h3>Cashier's Console</h3>
-    </div>
-    <div class="col-4">
-        <div class="input-group mb-3">
-            <span class="input-group-text">Cashier</span>
-            <input type="text" class="form-control" placeholder="Name" @bind-value="CashierName"
+@if (string.IsNullOrWhiteSpace(CashierName) == false)
+{
+    <div class="row mb-3">
+        <div class="col">
+            <h3>Cashier's Console</h3>
+        </div>
+        <div class="col-4">
+            <div class="input-group mb-3">
+                <span class="input-group-text">Cashier</span>
+                <input type="text" class="form-control" placeholder="Name" @bind-value="CashierName"
                    @bind-value:event="oninput" @onchange="HandleGhangeName">
+            </div>
         </div>
     </div>
-</div>
 
+    <div class="row">
+        <div class="col-4">
+            <div class="form-control border-0">
+                <SelectProductForSelling OnSelectProduct="HandleSelectProduct" />
 
-<div class="row">
-    <div class="col-4">
-        <div class="form-control border-0">
-            <SelectProductForSelling OnSelectProduct="HandleSelectProduct" />
-
-            <SellProduct SelectedProduct="SelectedProduct" CashierName="@CashierName" OnSoldProduct="HandleSoldProduct" />
+                <SellProduct SelectedProduct="SelectedProduct" CashierName="@CashierName" OnSoldProduct="HandleSoldProduct" />
+            </div>
+        </div>
+        <div class="col-8">
+            <TodayTransactionsByCashier @ref="TransactionsTable" />
         </div>
     </div>
-    <div class="col-8">
-        <TodayTransactionsByCashier @ref="TransactionsTable" />
-    </div>
-</div>
+}
 
 @code {
     public string? CashierName { get; set; }
     public Product? SelectedProduct { get; set; }
     public Product? SoldProduct { get; set; }
     public TodayTransactionsByCashier TransactionsTable { get; set; } = null!;
+
+    private AuthenticationState? authState;
+    [CascadingParameter]
+    private Task<AuthenticationState> _authState { get; set; } = null!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        authState = await _authState;
+        CashierName = authState.User.Identity?.Name;
+    }
 
     private void HandleSelectProduct(Product product)
     {

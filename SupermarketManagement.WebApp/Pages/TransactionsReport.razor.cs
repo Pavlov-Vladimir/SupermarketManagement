@@ -1,6 +1,6 @@
 ﻿namespace SupermarketManagement.WebApp.Pages;
 
-public partial class TransactionsReport
+public partial class TransactionsReport : ComponentBase
 {
     public List<Transaction>? Transactions { get; set; }
     public string? CashierName { get; set; }
@@ -15,41 +15,19 @@ public partial class TransactionsReport
 
     public void LoadTransactions(string cashierName, DateTime from, DateTime to)
     {
-        try
-        {
-            Transactions = SearchTransactionsUseCase.Execute(cashierName, from, to)?.ToList();
-            StateHasChanged();
-        }
-        catch (Exception)
-        {
-            throw;
-        }
-
+        Transactions = SearchTransactionsUseCase.Execute(cashierName, from, to)?.ToList();
+        StateHasChanged();
     }
 
     private string? GetProductName(int productId)
     {
-        try
-        {
-            return GetProductByIdUseCase.Execute(productId)?.Name;
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        return GetProductByIdUseCase.Execute(productId)?.Name;
     }
 
     private decimal GetProductPrice(int productId)
     {
-        try
-        {
-            var product = GetProductByIdUseCase.Execute(productId);
-            return product is null ? 0 : product.Price;
-        }
-        catch (Exception)
-        {
-            throw;
-        }
+        var product = GetProductByIdUseCase.Execute(productId);
+        return product is null ? 0 : product.Price;
     }
 
     private void PrintReport()

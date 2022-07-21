@@ -1,4 +1,5 @@
 ﻿@page "/Transactions"
+@attribute [Authorize(Policy = "AdminOnly")]
 
 <div id="printarea">
     <div class="row">
