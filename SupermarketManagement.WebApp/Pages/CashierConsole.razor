@@ -10,7 +10,7 @@
         <div class="col-4">
             <div class="input-group mb-3">
                 <span class="input-group-text">Cashier</span>
-                <input type="text" class="form-control" placeholder="Name" @bind-value="CashierName"
+                <input type="text" class="form-control" placeholder="Name" disabled @bind-value="CashierName"
                    @bind-value:event="oninput" @onchange="HandleGhangeName">
             </div>
         </div>
@@ -24,7 +24,7 @@
                 <SellProduct SelectedProduct="SelectedProduct" CashierName="@CashierName" OnSoldProduct="HandleSoldProduct" />
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-8 mt-4">
             <TodayTransactionsByCashier @ref="TransactionsTable" />
         </div>
     </div>

@@ -1,20 +1,45 @@
 ﻿@inherits LayoutComponentBase
 
-<PageTitle>SupermarketManagement.WebApp</PageTitle>
+<PageTitle>SupermarketManagement</PageTitle>
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
-    <main>
-        <div class="top-row px-4">
-            <LoginDisplay />
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+<header class="site-header sticky-top py-1">
+    <nav class="container d-flex flex-column flex-md-row justify-content-between">
+        <a class="py-2 d-none d-md-inline-block align-self-center" href="#" aria-label="Product">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto" role="img" viewBox="0 0 24 24"><title>Product</title><circle cx="12" cy="12" r="10" /><path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94" /></svg>
+        </a>
+        <div class="py-2 d-none d-md-inline-block">
+            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                <span class="oi oi-home" aria-hidden="true"></span> Home
+            </NavLink>
+        </div>
+        <div class="py-2 d-none d-md-inline-block">
+            <NavLink class="nav-link" href="CashierConsole">
+                <span class="oi oi-plus" aria-hidden="true"></span> Sell
+            </NavLink>
+        </div>
+        <div class="py-2 d-none d-md-inline-block">
+            <NavLink class="nav-link" href="Categories">
+                <span class="oi oi-box" aria-hidden="true"></span> Categories
+            </NavLink>
+        </div>
+        <div class="py-2 d-none d-md-inline-block">
+            <NavLink class="nav-link" href="Products">
+                <span class="oi oi-dashboard" aria-hidden="true"></span> Products
+            </NavLink>
+        </div>
+        <div class="py-2 d-none d-md-inline-block">
+            <NavLink class="nav-link" href="Transactions">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Reports
+            </NavLink>
         </div>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+        <LoginDisplay />
+    </nav>
+</header>
+
+<main>
+    <article class="content px-4">
+        @Body
+    </article>
+</main>
+
