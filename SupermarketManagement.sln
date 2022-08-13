@@ -17,6 +17,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupermarketManagement.WebAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SupermarketManagement.DataStore.SQL", "SupermarketManagement.DataStore.SQL\SupermarketManagement.DataStore.SQL.csproj", "{3D223FBE-3219-4460-893F-A8F9C5A1141F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B69C58C6-5969-4609-B664-FE3133E57F89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SupermarketManagement.Tests", "SupermarketManagement.Tests\SupermarketManagement.Tests.csproj", "{C7B15F66-C617-4DB6-AF8D-F0F94FB0D264}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,10 @@ Global
 		{3D223FBE-3219-4460-893F-A8F9C5A1141F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3D223FBE-3219-4460-893F-A8F9C5A1141F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3D223FBE-3219-4460-893F-A8F9C5A1141F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7B15F66-C617-4DB6-AF8D-F0F94FB0D264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7B15F66-C617-4DB6-AF8D-F0F94FB0D264}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7B15F66-C617-4DB6-AF8D-F0F94FB0D264}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7B15F66-C617-4DB6-AF8D-F0F94FB0D264}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +56,7 @@ Global
 		{1F806F8E-21E4-4548-925D-D64103E0CB84} = {1191B751-9CF5-44F6-91CE-DC593D7D1D51}
 		{44AFBDEA-8EC7-4446-80D5-C8E3030B2021} = {B64EA172-8DD2-4C37-8C75-9E3ED66F9F69}
 		{3D223FBE-3219-4460-893F-A8F9C5A1141F} = {7ACEE6F5-A96C-4E0B-A46C-92FEBAA81EAA}
+		{C7B15F66-C617-4DB6-AF8D-F0F94FB0D264} = {B69C58C6-5969-4609-B664-FE3133E57F89}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6803A4BB-7D39-4C6A-92B7-5223644C4D37}
