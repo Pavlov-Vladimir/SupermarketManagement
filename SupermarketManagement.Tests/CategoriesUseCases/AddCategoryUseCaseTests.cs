@@ -5,11 +5,11 @@ public class AddCategoryUseCaseTests : TestCategoryUseCaseBase
     public void AddCategoryUseCase_Success()
     {
         //Arrange        
-        AddCategoryUseCase sut = new(categoryRepository);
         string categoryName = "category name";
         string categoryDescription = "category description";
         const int categoryId = 4;
         var category = new Category { Id = categoryId, Name = categoryName, Description = categoryDescription };
+        var sut = new AddCategoryUseCase(categoryRepository);
 
         //Act
         sut.Execute(category);

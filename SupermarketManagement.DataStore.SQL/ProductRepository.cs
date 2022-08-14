@@ -10,6 +10,8 @@ public class ProductRepository : IProductRepository
 
     public void AddProduct(Product product)
     {
+        if (product == null) return;
+
         _dbContext.Products.Add(product);
         _dbContext.SaveChanges();
     }

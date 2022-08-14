@@ -1,6 +1,4 @@
-﻿using SupermarketManagement.UseCases.DataStorePlaginInterfaces;
-
-namespace SupermarketManagement.Tests.Common;
+﻿namespace SupermarketManagement.Tests.Common;
 public abstract class TestCategoryUseCaseBase : IDisposable
 {
     protected readonly MarketDbContext dbContext;
