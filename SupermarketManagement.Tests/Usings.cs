@@ -6,5 +6,5 @@ global using SupermarketManagement.UseCases.CategoriesUseCases;
 global using SupermarketManagement.Entities;
 global using FluentAssertions;
 global using AutoFixture;
-global using SupermarketManagement.UseCases.DataStorePlaginInterfaces;
 global using SupermarketManagement.UseCases.ProductsUseCases;
+global using SupermarketManagement.UseCases.TransactionsUseCases;

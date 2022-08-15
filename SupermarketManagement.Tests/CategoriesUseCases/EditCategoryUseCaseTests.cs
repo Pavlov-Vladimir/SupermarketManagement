@@ -11,7 +11,8 @@ public class EditCategoryUseCaseTests : TestCategoryUseCaseBase
         const string categoryName = "New Category Name";
         const string categoryDescription = "New Category Description";
         var fixture = new Fixture();
-        var category = fixture.Build<Category>().With(c => c.Id, MarketContextFactory.CATEGORY_ID_FOR_UPDATE)
+        var category = fixture.Build<Category>()
+            .With(c => c.Id, MarketContextFactory.CATEGORY_ID_FOR_UPDATE)
             .With(c => c.Name, categoryName)
             .With(c => c.Description, categoryDescription)
             .Without(c => c.Products)

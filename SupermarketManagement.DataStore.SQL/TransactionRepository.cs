@@ -38,18 +38,18 @@ public class TransactionRepository : ITransactionRepository
         _dbContext.SaveChanges();
     }
 
-    public IEnumerable<Transaction>? SearchTransactions(string cashierName, DateTime beagineDate, DateTime endDate)
+    public IEnumerable<Transaction>? SearchTransactions(string cashierName, DateTime beginDate, DateTime endDate)
     {
         if (cashierName == null)
         {
             return _dbContext.Transactions
-                .Where(t => t.TimeStamp.Date >= beagineDate.Date)
+                .Where(t => t.TimeStamp.Date >= beginDate.Date)
                 .Where(t => t.TimeStamp.Date <= endDate.Date)
                 .AsEnumerable();
         }
         return _dbContext.Transactions
             .Where(t => EF.Functions.Like(t.CashierName, $"%{cashierName}%"))
-            .Where(t => t.TimeStamp.Date >= beagineDate.Date)
+            .Where(t => t.TimeStamp.Date >= beginDate.Date)
             .Where(t => t.TimeStamp.Date <= endDate.Date)
             .AsEnumerable();
     }

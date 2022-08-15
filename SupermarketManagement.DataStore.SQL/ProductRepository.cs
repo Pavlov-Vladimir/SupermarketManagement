@@ -44,6 +44,8 @@ public class ProductRepository : IProductRepository
 
     public void UpdateProduct(Product product)
     {
+        if (product == null) return;
+
         var productToUpdate = _dbContext.Products.SingleOrDefault(p => p.Id == product.Id);
         if (productToUpdate == null) return;
 

@@ -35,7 +35,9 @@ public class AddProductUseCaseTests : TestProductUseCaseBase
         //Arrange
 
         //Act
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
         _sut.Execute(null);
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
         //Assert
         dbContext.Products.Should().NotContainNulls().And.HaveCount(4);        

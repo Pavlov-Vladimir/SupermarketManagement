@@ -3,6 +3,9 @@ public class MarketContextFactory
 {
     public const int CATEGORY_ID_FOR_DELETE = 3;
     public const int CATEGORY_ID_FOR_UPDATE = 3;
+    public const int PRODUCT_ID_FOR_DELETE = 4;
+    public const int PRODUCT_ID_FOR_UPDATE = 4;
+    public const int NOT_RELEVANT_ID = 100;
 
     public static MarketDbContext Create()
     {
@@ -21,11 +24,13 @@ public class MarketContextFactory
                 new Product { Id = 1, Name = "Coca-Cola", CategoryId = 1, Quantity = 100, Price = 1.11m },
                 new Product { Id = 2, Name = "Pepsi", CategoryId = 1, Quantity = 150, Price = 1.22m },
                 new Product { Id = 3, Name = "White bread", CategoryId = 2, Quantity = 100, Price = 0.70m },
-                new Product { Id = 4, Name = "Black bread", CategoryId = 2, Quantity = 200, Price = 0.99m }
+                new Product { Id = PRODUCT_ID_FOR_DELETE, Name = "Black bread", CategoryId = 2, Quantity = 200, Price = 0.99m }
             );
         dbContext.Transactions.AddRange(
                 new Transaction { Id = 1, CashierName = "Bob", Price = 1.11m, ProductId = 1, QtyBefore = 101, QtySold = 1, TimeStamp = DateTime.Now.AddDays(-1) },
-                new Transaction { Id = 2, CashierName = "Bob", Price = 1.22m, ProductId = 2, QtyBefore = 151, QtySold = 1, TimeStamp = DateTime.Now.AddDays(-1) }
+                new Transaction { Id = 2, CashierName = "Bob", Price = 1.22m, ProductId = 2, QtyBefore = 151, QtySold = 1, TimeStamp = DateTime.Now },
+                new Transaction { Id = 3, CashierName = "Tom", Price = 1.11m, ProductId = 1, QtyBefore = 101, QtySold = 1, TimeStamp = DateTime.Now.AddDays(-1) },
+                new Transaction { Id = 4, CashierName = "Tom", Price = 1.22m, ProductId = 2, QtyBefore = 151, QtySold = 1, TimeStamp = DateTime.Now }
             );
         dbContext.SaveChanges();
 

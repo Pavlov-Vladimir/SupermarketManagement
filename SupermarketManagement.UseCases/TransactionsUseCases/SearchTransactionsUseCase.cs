@@ -8,8 +8,8 @@ public class SearchTransactionsUseCase : ISearchTransactionsUseCase
         _transactionRepository = transactionRepository;
     }
 
-    public IEnumerable<Transaction>? Execute(string cashierName, DateTime beagineDate, DateTime endDate)
+    public IEnumerable<Transaction>? Execute(string cashierName, DateTime beginDate, DateTime endDate)
     {
-        return _transactionRepository.SearchTransactions(cashierName, beagineDate, endDate);
+        return _transactionRepository.SearchTransactions(cashierName, beginDate, endDate);
     }
 }
