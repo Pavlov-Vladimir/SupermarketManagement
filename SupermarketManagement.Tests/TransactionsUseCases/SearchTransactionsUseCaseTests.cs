@@ -30,11 +30,13 @@ public class SearchTransactionsUseCaseTests : TestTransactionUseCaseBase
             .AsEnumerable();
         var sut = new SearchTransactionsUseCase(transactionRepository);
 
-        //Act
-        var actual = sut.Execute(null, DateTime.Now, DateTime.Now);
+		//Act
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+		var actual = sut.Execute(null, DateTime.Now, DateTime.Now);
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
-        //Assert
-        actual.Should().BeEquivalentTo(expected).And.HaveCount(2);
+		//Assert
+		actual.Should().BeEquivalentTo(expected).And.HaveCount(2);
     }
 
     public static IEnumerable<object[]> GetDataForTransactions()

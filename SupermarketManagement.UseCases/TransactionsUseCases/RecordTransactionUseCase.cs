@@ -13,8 +13,10 @@ public class RecordTransactionUseCase : IRecordTransactionUseCase
     public void Execute(string cashierName, int productId, int qtySold)
     {
         var product = _productRepository.GetProduct(productId);
-        if (product == null)
-            return;
+        if (product == null) return;
+
+        if (qtySold < 1 || qtySold > product.Quantity)
+            throw new ArgumentOutOfRangeException("qtySold", qtySold, "The quantity for sale must be at least 1 and not more the quantity of product.");
 
         _transactionRepository.Save(cashierName, productId, qtySold);
     }
