@@ -26,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\SupermarketManagement.DataStore.SQL\SupermarketManagement.DataStore.SQL.csproj" />
     <ProjectReference Include="..\SupermarketManagement.Entities\SupermarketManagement.Entities.csproj" />
+    <ProjectReference Include="..\SupermarketManagement.Repositories\SupermarketManagement.Repositories.csproj" />
     <ProjectReference Include="..\SupermarketManagement.UseCases\SupermarketManagement.UseCases.csproj" />
   </ItemGroup>
 

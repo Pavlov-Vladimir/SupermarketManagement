@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SupermarketManagement.DataStore.SQL\SupermarketManagement.DataStore.SQL.csproj" />
+    <ProjectReference Include="..\SupermarketManagement.Entities\SupermarketManagement.Entities.csproj" />
+    <ProjectReference Include="..\SupermarketManagement.UseCases\SupermarketManagement.UseCases.csproj" />
+  </ItemGroup>
+
+</Project>
