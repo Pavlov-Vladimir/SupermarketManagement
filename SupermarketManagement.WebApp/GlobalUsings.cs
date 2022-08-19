@@ -18,3 +18,5 @@ global using Microsoft.JSInterop;
 global using SupermarketManagement.DataStore.SQL;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.AspNetCore.Identity;
+global using SupermarketManagement.DataStore.MySQL;
+global using SupermarketManagement.DataStore.MySQL.Repositories;

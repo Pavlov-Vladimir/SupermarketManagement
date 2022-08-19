@@ -1,4 +1,4 @@
-﻿namespace SupermarketManagement.DataStore.SQL;
+﻿namespace SupermarketManagement.DataStore.SQL.Repositories;
 public class CategoryRepository : ICategoryRepository
 {
     private readonly MarketDbContext _dbContext;

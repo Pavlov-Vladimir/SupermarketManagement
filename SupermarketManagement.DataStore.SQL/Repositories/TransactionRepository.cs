@@ -1,4 +1,4 @@
-﻿namespace SupermarketManagement.DataStore.SQL;
+﻿namespace SupermarketManagement.DataStore.SQL.Repositories;
 public class TransactionRepository : ITransactionRepository
 {
     private readonly MarketDbContext _dbContext;

@@ -6,7 +6,13 @@ builder.Services.AddServerSideBlazor();
 
 builder.Services.AddDbContext<MarketDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection"));
+});
+
+string connectionString = builder.Configuration.GetConnectionString("MySQLConnection");
+builder.Services.AddDbContext<MySqlMarketDbContext>(options =>
+{
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 
 builder.Services.AddDbContext<AccountContext>(options =>

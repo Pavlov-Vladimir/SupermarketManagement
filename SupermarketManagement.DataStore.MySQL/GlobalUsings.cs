@@ -7,5 +7,4 @@ global using SupermarketManagement.UseCases.DataStorePlaginInterfaces;
 global using SupermarketManagement.Entities;
 global using SupermarketManagement.UseCases;
 global using Microsoft.EntityFrameworkCore;
-global using SupermarketManagement.DataStore.SQL;
-
+global using SupermarketManagement.DataStore.MySQL;

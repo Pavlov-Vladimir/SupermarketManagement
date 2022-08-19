@@ -8,3 +8,5 @@ global using SupermarketManagement.Entities;
 global using SupermarketManagement.UseCases.Common.Exceptions;
 global using Microsoft.EntityFrameworkCore;
 global using SupermarketManagement.DataStore.SQL;
+global using SupermarketManagement.DataStore.MySQL;
+global using SupermarketManagement.UseCases;

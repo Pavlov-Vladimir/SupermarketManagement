@@ -8,3 +8,5 @@ global using FluentAssertions;
 global using AutoFixture;
 global using SupermarketManagement.UseCases.ProductsUseCases;
 global using SupermarketManagement.UseCases.TransactionsUseCases;
+global using SupermarketManagement.DataStore.SQL.Repositories;
+

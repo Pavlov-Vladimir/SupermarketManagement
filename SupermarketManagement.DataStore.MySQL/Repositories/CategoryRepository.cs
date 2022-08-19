@@ -1,9 +1,9 @@
-﻿namespace SupermarketManagement.Repositories;
+﻿namespace SupermarketManagement.DataStore.MySQL.Repositories;
 public class CategoryRepository : ICategoryRepository
 {
-    private readonly MarketDbContext _dbContext;
+    private readonly MySqlMarketDbContext _dbContext;
 
-    public CategoryRepository(MarketDbContext dbContext)
+    public CategoryRepository(MySqlMarketDbContext dbContext)
     {
         _dbContext = dbContext;
     }

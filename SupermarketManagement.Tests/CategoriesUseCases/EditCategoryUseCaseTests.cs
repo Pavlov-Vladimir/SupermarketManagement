@@ -1,6 +1,4 @@
-﻿using SupermarketManagement.Entities;
-
-namespace SupermarketManagement.Tests.CategoriesUseCases;
+﻿namespace SupermarketManagement.Tests.CategoriesUseCases;
 public class EditCategoryUseCaseTests : TestCategoryUseCaseBase
 {
     [Fact]
@@ -44,10 +42,12 @@ public class EditCategoryUseCaseTests : TestCategoryUseCaseBase
     public void EditCategoryUseCase_Fail_if_category_is_null()
     {
         //Arrange
-        EditCategoryUseCase sut = new(categoryRepository);        
+        EditCategoryUseCase sut = new(categoryRepository);
 
         //Act
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
         sut.Execute(null);
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
         //Assert
         Assert.DoesNotContain(null, dbContext.Categories);

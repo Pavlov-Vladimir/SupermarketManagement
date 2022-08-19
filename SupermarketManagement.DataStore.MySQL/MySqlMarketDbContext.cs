@@ -1,10 +1,9 @@
-﻿namespace SupermarketManagement.DataStore.SQL;
-public class MarketDbContext : DbContext
+﻿namespace SupermarketManagement.DataStore.MySQL;
+public class MySqlMarketDbContext : DbContext
 {
-    public MarketDbContext(DbContextOptions<MarketDbContext> options) : base(options)
+    public MySqlMarketDbContext(DbContextOptions<MySqlMarketDbContext> options) : base(options)
     {
     }
-
 
     public DbSet<Category> Categories { get; set; } = null!;
     public DbSet<Product> Products { get; set; } = null!;

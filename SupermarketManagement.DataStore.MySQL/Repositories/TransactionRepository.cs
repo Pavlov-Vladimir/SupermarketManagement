@@ -1,9 +1,9 @@
-﻿namespace SupermarketManagement.Repositories;
+﻿namespace SupermarketManagement.DataStore.MySQL.Repositories;
 public class TransactionRepository : ITransactionRepository
 {
-    private readonly MarketDbContext _dbContext;
+    private readonly MySqlMarketDbContext _dbContext;
 
-    public TransactionRepository(MarketDbContext dbContext)
+    public TransactionRepository(MySqlMarketDbContext dbContext)
     {
         _dbContext = dbContext;
     }
