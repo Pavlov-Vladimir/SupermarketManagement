@@ -16,7 +16,7 @@ public class DeleteCategoryUseCaseTests : TestCategoryUseCaseBase
 
         //Assert
         Assert.Equal(expected, actual);
-        Assert.Null(dbContext.Categories.SingleOrDefault(category => 
+        Assert.Null(dbContext.Categories.SingleOrDefault(category =>
             category.Id == categoryId));
     }
 

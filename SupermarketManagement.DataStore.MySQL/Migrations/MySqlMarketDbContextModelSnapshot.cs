@@ -74,7 +74,7 @@ namespace SupermarketManagement.DataStore.MySQL.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("DECIMAL(19,4)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -148,7 +148,7 @@ namespace SupermarketManagement.DataStore.MySQL.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("DECIMAL(19,4)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");

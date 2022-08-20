@@ -24,4 +24,8 @@
     <ProjectReference Include="..\SupermarketManagement.UseCases\SupermarketManagement.UseCases.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

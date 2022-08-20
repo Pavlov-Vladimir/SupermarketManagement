@@ -46,6 +46,12 @@
         CashierName = authState.User.Identity?.Name;
     }
 
+    protected override void OnAfterRender(bool firstRender)
+    {
+        //base.OnAfterRender(firstRender);
+        UpdateTransactionsTable();
+    }
+
     private void HandleSelectProduct(Product product)
     {
         SelectedProduct = product;
@@ -54,19 +60,21 @@
     private void HandleSoldProduct(Product product)
     {
         SoldProduct = product;
-        if (CashierName is not null)
-        {
-            TransactionsTable.LoadTransactions(CashierName);
-        }
+        UpdateTransactionsTable();
         StateHasChanged();
     }
 
     private void HandleGhangeName()
     {
+        UpdateTransactionsTable();
+        StateHasChanged();
+    }
+
+    private void UpdateTransactionsTable()
+    {
         if (CashierName is not null)
         {
             TransactionsTable.LoadTransactions(CashierName);
         }
-        StateHasChanged();
     }
 }

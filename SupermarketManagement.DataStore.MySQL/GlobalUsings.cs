@@ -1,10 +1,6 @@
-﻿global using System;
+﻿global using Microsoft.EntityFrameworkCore;
+global using SupermarketManagement.Entities;
+global using SupermarketManagement.UseCases.DataStorePlaginInterfaces;
+global using System;
 global using System.Collections.Generic;
 global using System.Linq;
-global using System.Text;
-global using System.Threading.Tasks;
-global using SupermarketManagement.UseCases.DataStorePlaginInterfaces;
-global using SupermarketManagement.Entities;
-global using SupermarketManagement.UseCases;
-global using Microsoft.EntityFrameworkCore;
-global using SupermarketManagement.DataStore.MySQL;

@@ -1,12 +1,11 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace SupermarketManagement.DataStore.MySQL.Migrations
 {
-    public partial class InitMySQL : Migration
+    public partial class InitMySql : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -38,7 +37,7 @@ namespace SupermarketManagement.DataStore.MySQL.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     TimeStamp = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    Price = table.Column<decimal>(type: "DECIMAL(19,4)", nullable: false),
                     QtyBefore = table.Column<int>(type: "int", nullable: false),
                     QtySold = table.Column<int>(type: "int", nullable: false),
                     CashierName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
@@ -60,7 +59,7 @@ namespace SupermarketManagement.DataStore.MySQL.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(65,30)", nullable: false)
+                    Price = table.Column<decimal>(type: "DECIMAL(19,4)", nullable: false)
                 },
                 constraints: table =>
                 {

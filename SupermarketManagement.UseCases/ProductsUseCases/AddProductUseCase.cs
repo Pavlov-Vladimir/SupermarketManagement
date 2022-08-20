@@ -10,6 +10,6 @@ public class AddProductUseCase : IAddProductUseCase
 
     public void Execute(Product product)
     {
-        _productRepository.AddProduct(product);        
+        _productRepository.AddProduct(product);
     }
 }

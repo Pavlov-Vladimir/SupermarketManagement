@@ -24,7 +24,7 @@ public class CategoryRepository : ICategoryRepository
         if (category.Products == null || category.Products.Any() == false)
         {
             _dbContext.Categories.Remove(category);
-            _dbContext.SaveChanges(); 
+            _dbContext.SaveChanges();
         }
     }
 
@@ -40,7 +40,7 @@ public class CategoryRepository : ICategoryRepository
 
     public void UpdateCategory(Category category)
     {
-        if(category == null) return;
+        if (category == null) return;
 
         var categoryToUpdate = _dbContext.Categories.SingleOrDefault(c => c.Id == category.Id);
         if (categoryToUpdate == null) return;

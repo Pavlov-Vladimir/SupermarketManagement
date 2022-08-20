@@ -35,12 +35,12 @@ public partial class SelectProductForSelling : ComponentBase
     private void GetProductsList(int categoryId)
     {
         Products = ViewProductsByCategoryId.Execute(categoryId);
-        OnSelectProduct.InvokeAsync(null);        
+        OnSelectProduct.InvokeAsync(null);
     }
 
     private void SelectProduct_Click(Product product)
     {
         selectedProductId = product.Id;
-        OnSelectProduct.InvokeAsync(product);        
+        OnSelectProduct.InvokeAsync(product);
     }
 }

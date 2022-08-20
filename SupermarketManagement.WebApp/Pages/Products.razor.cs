@@ -16,7 +16,7 @@ public partial class Products : ComponentBase
     {
         try
         {
-            ProductsList = ViewProductsUseCase.Execute()?.ToList();            
+            ProductsList = ViewProductsUseCase.Execute()?.ToList();
         }
         catch (Exception ex)
         {

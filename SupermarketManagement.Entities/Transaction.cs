@@ -1,6 +1,6 @@
 ﻿namespace SupermarketManagement.Entities;
 public class Transaction
-{    
+{
     public int Id { get; set; }
     [Required]
     public DateTime TimeStamp { get; set; }

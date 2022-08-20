@@ -15,7 +15,7 @@
                 <td>@product.Name</td>
                 <td>@GetCategoryName(product.CategoryId)</td>
                 <td>@product.Quantity</td>
-                <td>$ @product.Price</td>
+                <td>$ @string.Format("{0:N}", product.Price)</td>
                 <td class="text-center">
                     <a href="/EditProduct/@product.Id">Edit</a>
                     <button class="btn btn-link py-0 align-baseline"

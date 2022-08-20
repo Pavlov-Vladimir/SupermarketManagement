@@ -15,7 +15,7 @@
         </div>
         <div class="form-group mb-3">
             <label for="price">Price</label>
-            <input id="price" type="text" class="form-control" readonly value="$@ProductToSell.Price" />
+            <input id="price" type="text" class="form-control" readonly value="$@string.Format("{0:N}", ProductToSell.Price)" />
         </div>
         <div class="form-group mb-3">
             <label for="qty">Quantity to sell</label>

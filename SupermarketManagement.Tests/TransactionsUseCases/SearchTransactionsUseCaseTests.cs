@@ -1,26 +1,26 @@
 ﻿namespace SupermarketManagement.Tests.TransactionsUseCases;
 public class SearchTransactionsUseCaseTests : TestTransactionUseCaseBase
 {
-	[Theory]
-	[MemberData(nameof(GetDataForTransactions))]
-	public void SearchTransactionsUseCase_Success(string cashierName, DateTime start, DateTime stop)
-	{
-		//Arrange
-		var expected = dbContext.Transactions
-			.Where(t => t.TimeStamp.Date >= start.Date)
-			.Where(t => t.TimeStamp.Date <= stop.Date)
-			.Where(t => t.CashierName.Contains(cashierName, StringComparison.InvariantCultureIgnoreCase))
-			.AsEnumerable();
-		var sut = new SearchTransactionsUseCase(transactionRepository);
+    [Theory]
+    [MemberData(nameof(GetDataForTransactions))]
+    public void SearchTransactionsUseCase_Success(string cashierName, DateTime start, DateTime stop)
+    {
+        //Arrange
+        var expected = dbContext.Transactions
+            .Where(t => t.TimeStamp.Date >= start.Date)
+            .Where(t => t.TimeStamp.Date <= stop.Date)
+            .Where(t => t.CashierName.Contains(cashierName, StringComparison.InvariantCultureIgnoreCase))
+            .AsEnumerable();
+        var sut = new SearchTransactionsUseCase(transactionRepository);
 
-		//Act
-		var actual = sut.Execute(cashierName, start, stop);
+        //Act
+        var actual = sut.Execute(cashierName, start, stop);
 
         //Assert
-		actual.Should().BeEquivalentTo(expected);
+        actual.Should().BeEquivalentTo(expected);
     }
 
-	[Fact]
+    [Fact]
     public void SearchTransactionsUseCase_SuccessWhenCashierNameIsNull()
     {
         //Arrange
@@ -30,20 +30,20 @@ public class SearchTransactionsUseCaseTests : TestTransactionUseCaseBase
             .AsEnumerable();
         var sut = new SearchTransactionsUseCase(transactionRepository);
 
-		//Act
+        //Act
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-		var actual = sut.Execute(null, DateTime.Now, DateTime.Now);
+        var actual = sut.Execute(null, DateTime.Now, DateTime.Now);
 #pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
-		//Assert
-		actual.Should().BeEquivalentTo(expected).And.HaveCount(2);
+        //Assert
+        actual.Should().BeEquivalentTo(expected).And.HaveCount(2);
     }
 
     public static IEnumerable<object[]> GetDataForTransactions()
-	{
-		yield return new object[] { "bob", DateTime.Now, DateTime.Now };
-		yield return new object[] { "bob", DateTime.Now.AddDays(-3), DateTime.Now };
-		yield return new object[] { "tom", DateTime.Now, DateTime.Now };
-		yield return new object[] { "bot", DateTime.Now.AddDays(-3), DateTime.Now };
+    {
+        yield return new object[] { "bob", DateTime.Now, DateTime.Now };
+        yield return new object[] { "bob", DateTime.Now.AddDays(-3), DateTime.Now };
+        yield return new object[] { "tom", DateTime.Now, DateTime.Now };
+        yield return new object[] { "bot", DateTime.Now.AddDays(-3), DateTime.Now };
     }
 }

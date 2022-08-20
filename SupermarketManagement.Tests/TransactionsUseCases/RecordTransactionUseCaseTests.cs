@@ -1,34 +1,34 @@
 ﻿namespace SupermarketManagement.Tests.TransactionsUseCases;
 public class RecordTransactionUseCaseTests : TestTransactionUseCaseBase
 {
-	private readonly ProductRepository productRepository;
+    private readonly ProductRepository productRepository;
 
-	public RecordTransactionUseCaseTests()
-	{
-		productRepository = new ProductRepository(dbContext);
-	}
+    public RecordTransactionUseCaseTests()
+    {
+        productRepository = new ProductRepository(dbContext);
+    }
 
-	[Fact]
-	public void RecordTransactionUseCase_Success()
-	{
-		//Arrange
-		string cashierName = "Jerry";
-		int productId = 1;
-		int qtySold = 3;
-		var product = dbContext.Products.Find(productId);
-		
-		var sut = new RecordTransactionUseCase(transactionRepository, productRepository);
+    [Fact]
+    public void RecordTransactionUseCase_Success()
+    {
+        //Arrange
+        string cashierName = "Jerry";
+        int productId = 1;
+        int qtySold = 3;
+        var product = dbContext.Products.Find(productId);
 
-		//Act
-		sut.Execute(cashierName, productId, qtySold);
-		var actual = dbContext.Transactions.SingleOrDefault(t =>
-			t.CashierName == cashierName &&
-			t.ProductId == productId &&
-			t.QtySold == qtySold &&
-			t.QtyBefore == product!.Quantity + qtySold);
+        var sut = new RecordTransactionUseCase(transactionRepository, productRepository);
+
+        //Act
+        sut.Execute(cashierName, productId, qtySold);
+        var actual = dbContext.Transactions.SingleOrDefault(t =>
+            t.CashierName == cashierName &&
+            t.ProductId == productId &&
+            t.QtySold == qtySold &&
+            t.QtyBefore == product!.Quantity + qtySold);
 
         //Assert
-		actual.Should().NotBeNull();
+        actual.Should().NotBeNull();
     }
 
     [Fact]

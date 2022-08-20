@@ -48,7 +48,7 @@ public partial class Categories : ComponentBase
             _categories!.Remove(category);
         }
     }
-    
+
     private void HandleResetError()
     {
         ErrorMessage = null;

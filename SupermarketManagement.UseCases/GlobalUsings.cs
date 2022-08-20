@@ -1,12 +1,7 @@
-﻿global using System;
-global using System.Collections.Generic;
-global using System.Linq;
-global using System.Text;
-global using System.Threading.Tasks;
-global using System.ComponentModel.DataAnnotations;
-global using SupermarketManagement.Entities;
+﻿global using SupermarketManagement.Entities;
 global using SupermarketManagement.UseCases.DataStorePlaginInterfaces;
-global using SupermarketManagement.UseCases.UseCasesInterfaces;
 global using SupermarketManagement.UseCases.ProductsUseCasesInterfaces;
 global using SupermarketManagement.UseCases.TransactionsUseCasesInterfaces;
-global using Microsoft.EntityFrameworkCore;
+global using SupermarketManagement.UseCases.UseCasesInterfaces;
+global using System;
+global using System.Collections.Generic;

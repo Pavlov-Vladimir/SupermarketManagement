@@ -11,8 +11,8 @@ using SupermarketManagement.DataStore.MySQL;
 namespace SupermarketManagement.DataStore.MySQL.Migrations
 {
     [DbContext(typeof(MySqlMarketDbContext))]
-    [Migration("20220819212310_InitMySQL")]
-    partial class InitMySQL
+    [Migration("20220820111028_InitMySql")]
+    partial class InitMySql
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -76,7 +76,7 @@ namespace SupermarketManagement.DataStore.MySQL.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("DECIMAL(19,4)");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
@@ -150,7 +150,7 @@ namespace SupermarketManagement.DataStore.MySQL.Migrations
                         .HasColumnType("varchar(50)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(65,30)");
+                        .HasColumnType("DECIMAL(19,4)");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");

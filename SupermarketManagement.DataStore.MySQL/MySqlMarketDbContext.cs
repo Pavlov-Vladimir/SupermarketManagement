@@ -16,6 +16,9 @@ public class MySqlMarketDbContext : DbContext
             .WithOne(p => p.Category)
             .HasForeignKey(p => p.CategoryId);
 
+        modelBuilder.Entity<Product>(e => e.Property(p => p.Price).HasColumnType("DECIMAL(19,4)"));
+        modelBuilder.Entity<Transaction>(e => e.Property(t => t.Price).HasColumnType("DECIMAL(19,4)"));
+
         modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Beverage", Description = "Beverage" },
                 new Category { Id = 2, Name = "Bakery", Description = "Bakery" },
