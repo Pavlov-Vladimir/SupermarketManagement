@@ -9,7 +9,7 @@ builder.Services.AddDbContext<MarketDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection"));
 });
 
-string connectionString = builder.Configuration.GetConnectionString("MySQLConnection");
+string connectionString = builder.Configuration.GetConnectionString("Default Connection");
 builder.Services.AddDbContext<MySqlMarketDbContext>(options =>
 {
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
